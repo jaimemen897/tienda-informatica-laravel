@@ -14,43 +14,84 @@ class ClientsTableSeeder extends Seeder
     public function run(): void
     {
         Client::create([
-            'name' => 'Juan Perez Delgado',
+            'name' => 'Juan',
+            'surname' => 'Perez Delgado',
+            'phone' => '678364965',
             'email' => 'juanperezdelgado@clowns.com',
             'password' => bcrypt('juanperezdelgado')
         ]);
         Client::create([
-            'name' => 'Maria Lopez',
-            'email' => 'marialopez@clowns.com',
-            'password' => bcrypt('marialopez')
-        ]);
-        Client::create([
-            'name' => 'Pedro Ramirez',
-            'email' => 'pedroramirez@clowns.com',
-            'password' => bcrypt('pedroramirez')
+            'name' => 'María',
+            'surname' => 'Gómez López',
+            'phone' => '645782319',
+            'email' => 'mariagomezlopez@clowns.com',
+            'password' => bcrypt('mariagomezlopez')
         ]);
 
         Client::create([
-            'name' => 'Laura Sanchez',
-            'email' => 'laurasanchez@clowns.com',
-            'password' => bcrypt('laurasanchez')
+            'name' => 'Pedro',
+            'surname' => 'Martínez García',
+            'phone' => '632548971',
+            'email' => 'pedromartinezgarcia@clowns.com',
+            'password' => bcrypt('pedromartinezgarcia')
         ]);
 
         Client::create([
-            'name' => 'Carlos Gomez',
-            'email' => 'carlosgomez@clowns.com',
-            'password' => bcrypt('carlosgomez')
+            'name' => 'Ana',
+            'surname' => 'Fernández Rodríguez',
+            'phone' => '654987321',
+            'email' => 'anafernandezrodriguez@clowns.com',
+            'password' => bcrypt('anafernandezrodriguez')
         ]);
 
         Client::create([
-            'name' => 'Ana Martinez',
-            'email' => 'anamartinez@clowns.com',
-            'password' => bcrypt('anamartinez')
+            'name' => 'David',
+            'surname' => 'Sánchez Pérez',
+            'phone' => '687452136',
+            'email' => 'davidsanchezperez@clowns.com',
+            'password' => bcrypt('davidsanchezperez')
         ]);
 
         Client::create([
-            'name' => 'Javier Fernandez',
-            'email' => 'javierfernandez@clowns.com',
-            'password' => bcrypt('javierfernandez')
+            'name' => 'Laura',
+            'surname' => 'García Martínez',
+            'phone' => '698745123',
+            'email' => 'lauragarciama@clowns.com',
+            'password' => bcrypt('lauragarciama')
         ]);
+
+        Client::create([
+            'name' => 'Carlos',
+            'surname' => 'Fernández López',
+            'phone' => '675849621',
+            'email' => 'carlosfernandezlopez@clowns.com',
+            'password' => bcrypt('carlosfernandezlopez')
+        ]);
+
+        Client::create([
+            'name' => 'Sofía',
+            'surname' => 'Martín Sánchez',
+            'phone' => '654789632',
+            'email' => 'sofiamartinsanchez@clowns.com',
+            'password' => bcrypt('sofiamartinsanchez')
+        ]);
+
+        Client::create([
+            'name' => 'Pablo',
+            'surname' => 'Hernández Gómez',
+            'phone' => '687954123',
+            'email' => 'pablohernandezgomez@clowns.com',
+            'password' => bcrypt('pablohernandezgomez')
+        ]);
+
+        Client::create([
+            'name' => 'Lucía',
+            'surname' => 'González Martínez',
+            'phone' => '698742136',
+            'email' => 'luciagonzalezm@clowns.com',
+            'password' => bcrypt('luciagonzalezm')
+        ]);
+
+
     }
 }

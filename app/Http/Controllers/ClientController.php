@@ -40,6 +40,8 @@ class ClientController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255|min:2',
+            'surname' => 'required|string|max:255|min:2',
+            'phone' => 'required|string|max:9|min:9',
             'email' => 'required|string|email|unique:clients,email',
             'password' => 'required|string|min:6|max:255',
         ], $this->messages());
@@ -50,6 +52,8 @@ class ClientController extends Controller
 
         $client = new Client();
         $client->name = $request->name;
+        $client->surname = $request->surname;
+        $client->phone = $request->phone;
         $client->email = $request->email;
         $client->image = $client::$IMAGE_DEFAULT;
         $client->password = bcrypt($request->password);
@@ -74,9 +78,11 @@ class ClientController extends Controller
         $client = Client::find($id);
         if ($client){
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255|min:2',
-                'email' => 'required|string|email|unique:clients,email,'.$id,
-                'password' => 'required|string|min:6|max:255',
+                'name' => 'string|max:255|min:2',
+                'surname' => 'string|max:255|min:2',
+                'phone' => 'string|max:9|min:9',
+                'email' => 'string|email|unique:clients,email,'.$id,
+                'password' => 'string|min:6|max:255',
             ], $this->messages());
 
             if ($validator->fails()) {
@@ -84,6 +90,8 @@ class ClientController extends Controller
             }
 
             $client->name = $request->name;
+            $client->surname = $request->surname;
+            $client->phone = $request->phone;
             $client->email = $request->email;
             $client->password = bcrypt($request->password);
             $client->save();
@@ -158,6 +166,14 @@ class ClientController extends Controller
             'name.string' => 'El nombre debe ser una cadena de texto',
             'name.max' => 'El nombre debe tener máximo 255 caracteres',
             'name.min' => 'El nombre debe tener mínimo 2 caracteres',
+            'surname.required' => 'El apellido es requerido',
+            'surname.string' => 'El apellido debe ser una cadena de texto',
+            'surname.max' => 'El apellido debe tener máximo 255 caracteres',
+            'surname.min' => 'El apellido debe tener mínimo 2 caracteres',
+            'phone.required' => 'El teléfono es requerido',
+            'phone.string' => 'El teléfono debe ser una cadena de texto',
+            'phone.max' => 'El teléfono debe tener 9 caracteres',
+            'phone.min' => 'El teléfono debe tener 9 caracteres',
             'email.required' => 'El email es requerido',
             'email.string' => 'El email debe ser una cadena de texto',
             'email.email' => 'El email debe ser un email válido',

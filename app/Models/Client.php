@@ -15,6 +15,8 @@ class Client extends Model
     protected $fillable = [
         'id',
         'name',
+        'surname',
+        'phone',
         'email',
         'image',
         'password',
@@ -24,8 +26,10 @@ class Client extends Model
 
     public function scopeSearch($query, $search)
     {
-        return $query->where('name', 'like', '%' . $search . '%')
-            ->orWhere('email', 'like', '%' . $search . '%');
+        return $query->where('name', 'LIKE', "%$search%")
+            ->orWhere('surname', 'LIKE', "%$search%")
+            ->orWhere('phone', 'LIKE', "%$search%")
+            ->orWhere('email', 'LIKE', "%$search%");
     }
 
     public static function boot()
