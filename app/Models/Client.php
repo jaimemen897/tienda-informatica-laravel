@@ -11,11 +11,12 @@ class Client extends Model
 {
     use HasFactory;
     use HasUUids;
-
+    public static $IMAGE_DEFAULT = 'https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg';
     protected $fillable = [
         'id',
         'name',
         'email',
+        'image',
         'password',
     ];
     protected $keyType = 'string';

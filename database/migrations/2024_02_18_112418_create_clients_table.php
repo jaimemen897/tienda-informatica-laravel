@@ -15,6 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('image')->default('https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg');
             $table->string('password');
             $table->timestamps();
         });
