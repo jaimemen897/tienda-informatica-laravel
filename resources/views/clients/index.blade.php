@@ -19,7 +19,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" id="search" name="search" placeholder="Nombre, email o número de teléfono">
                 <div class="input-group-append">
-                    <button class="btn btn-primary btn-search" type="submit">
+                    <button class="btn btn-primary btn-search ms-2" type="submit">
                         <i class="bi bi-search"></i> Buscar
                     </button>
                 </div>
@@ -32,7 +32,7 @@
                     <div class="col-md-4 mb-4">
                         <div class="card">
                             @if($client->image != Client::$IMAGE_DEFAULT)
-                                <div class="divImage gap-3">
+                                <div class="divImage">
                                     <img class="card-img-top" alt="Imagen del client"
                                          src="{{ asset('storage/clients/' . $client->image) }}">
                                 </div>

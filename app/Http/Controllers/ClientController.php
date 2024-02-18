@@ -106,7 +106,7 @@ class ClientController extends Controller
     {
         $client = Client::find($id);
         if ($client) {
-            return view('clients.edit-image')->with('client', $client);
+            return view('clients.image')->with('client', $client);
         } else {
             flash('Cliente no encontrado')->error();
             return redirect()->route('client.index');

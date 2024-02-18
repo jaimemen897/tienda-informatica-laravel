@@ -23,7 +23,7 @@
                 <dt class="col-sm-2">Nombre:</dt>
                 <dd class="col-sm-10">{{$client->name}}</dd>
                 <dt class="col-sm-2">Apellidos:</dt>
-                <dd class="col-sm-10">{{$client->surnames}}</dd>
+                <dd class="col-sm-10">{{$client->surname}}</dd>
                 <dt class="col-sm-2">Teléfono:</dt>
                 <dd class="col-sm-10">{{$client->phone}}</dd>
                 <dt class="col-sm-2">Correo:</dt>
@@ -45,12 +45,12 @@
             <div class="col-sm-6">
                 <dt class="col-sm-2">Imagen:</dt>
                 <dd class="col-sm-10">
-                    @if($client->image != Cliente::$IMAGE_DEFAULT)
+                    @if($client->image != Client::$IMAGE_DEFAULT)
                         <img alt="Imagen del client" class="img-fluid"
                              src="{{ asset('storage/clients/' . $client->image) }}"
                              width="300" height="300">
                     @else
-                        <img alt="Imagen por defecto" class="img-fluid" src="{{ Cliente::$IMAGE_DEFAULT }}" width="300"
+                        <img alt="Imagen por defecto" class="img-fluid" src="{{ Client::$IMAGE_DEFAULT }}" width="300"
                              height="300">
                     @endif
                 </dd>

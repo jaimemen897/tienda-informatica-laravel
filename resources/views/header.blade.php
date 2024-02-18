@@ -13,7 +13,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('client.index') }}">Inicio</a>
+                        <a class="nav-link" href="{{ route('client.index') }}">Clientes</a>
                     </li>
                     @if( auth()->user() && auth()->user()->role == 'admin' )
                         <li class="nav-item">
@@ -27,7 +27,7 @@
                         <button class="btn btn-dark me-1" style="color: #FFFFFF8C" type="submit">Cerrar sesión</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-dark botonSesion">Iniciar sesión</a>
+                    <a href="{{ route('login') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">Iniciar sesión</a>
                 @endif
                 <span class="navbar-text">
                     {{ auth()->user()->name ?? 'Invitado' }}
