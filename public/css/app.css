@@ -29,12 +29,18 @@ footer {
     margin-left: 10px;
 }
 
-.botonSesion{
-    color: #FFFFFF8C;
+.botonCajaClient{
+    margin: 4px 2px;
 }
 
-.formBorrar{
-    margin-right: 4px;
+.cajaBotones {
+    display:flex;
+    justify-content: center;
+}
+
+.nav-item.align-items-center {
+    display: flex;
+    align-items: center;
 }
 
 .divImage{

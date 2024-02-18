@@ -17,7 +17,7 @@
         <form action="{{ route('client.index') }}" class="mb-3" method="get">
             @csrf
             <div class="input-group">
-                <input type="text" class="form-control" id="search" name="search" placeholder="Nombre">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Nombre, email o número de teléfono">
                 <div class="input-group-append">
                     <button class="btn btn-primary btn-search" type="submit">
                         <i class="bi bi-search"></i> Buscar
@@ -49,7 +49,7 @@
                                     @if(auth()->user() && auth()->user()->role == 'admin')
                                         <div class="cajaBotones w-100">
                                             <form action="{{ route('client.destroy', $client->id) }}" method="POST"
-                                                  class="formBorrar">
+                                                  class="me-1">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger botonCajaClient w-100"
@@ -81,12 +81,12 @@
             </div>
             @if(auth()->user() && auth()->user()->role == 'admin')
                 <a class="btn btn-success mt-4" href={{ route('client.store') }}><i class="bi bi-plus"></i> Nuevo
-                    Client</a>
+                    Cliente</a>
             @endif
         @else
             <div class="alert alert-warning" role="alert">
                 <p class='mb-0'>
-                    No se encontraron clients
+                    No se encontraron clientes
                 </p>
             </div>
         @endif

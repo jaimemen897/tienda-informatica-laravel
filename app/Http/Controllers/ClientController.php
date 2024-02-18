@@ -11,7 +11,7 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
-        $clients = Client::search($request->search)->orderBy('name', 'asc')->paginate(5);
+        $clients = Client::search($request->search)->orderBy('name', 'asc')->paginate(6);
         if ($clients){
             return view('clients.index')->with('clients', $clients);
         } else {
@@ -27,7 +27,7 @@ class ClientController extends Controller
             return view('clients.show')->with('client', $client);
         } else {
             flash('Cliente no encontrado')->error();
-            return redirect()->route('clients.index');
+            return redirect()->route('client.index');
         }
     }
 
@@ -59,7 +59,7 @@ class ClientController extends Controller
         $client->password = bcrypt($request->password);
         $client->save();
         flash('Cliente creado correctamente')->success();
-        return redirect()->route('clients.index');
+        return redirect()->route('client.index');
     }
 
     public function edit($id)
@@ -69,7 +69,7 @@ class ClientController extends Controller
             return view('clients.edit')->with('client', $client);
         } else {
             flash('Cliente no encontrado')->error();
-            return redirect()->route('clients.index');
+            return redirect()->route('client.index');
         }
     }
 
@@ -99,7 +99,7 @@ class ClientController extends Controller
         } else {
             flash('Cliente no encontrado')->error();
         }
-        return redirect()->route('clients.index');
+        return redirect()->route('client.index');
     }
 
     public function editImage($id)
@@ -109,7 +109,7 @@ class ClientController extends Controller
             return view('clients.edit-image')->with('client', $client);
         } else {
             flash('Cliente no encontrado')->error();
-            return redirect()->route('clients.index');
+            return redirect()->route('client.index');
         }
     }
 
@@ -140,7 +140,7 @@ class ClientController extends Controller
         } else {
             flash('Cliente no encontrado')->error();
         }
-        return redirect()->route('clients.index');
+        return redirect()->route('client.index');
     }
 
     public function destroy($id)
@@ -156,7 +156,7 @@ class ClientController extends Controller
         } else {
             flash('Cliente no encontrado')->error();
         }
-        return redirect()->route('clients.index');
+        return redirect()->route('client.index');
     }
 
     public function messages()

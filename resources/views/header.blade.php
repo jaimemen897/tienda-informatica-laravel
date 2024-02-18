@@ -16,25 +16,22 @@
                         <a class="nav-link" href="{{ route('client.index') }}">Inicio</a>
                     </li>
                     @if( auth()->user() && auth()->user()->role == 'admin' )
-                        {{--<li class="nav-item">
-                            <a class="nav-link" href="{{ route('category.index') }}">Categorías</a>
-                        </li>--}}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('client.store') }}">Nuevo cliente</a>
                         </li>
                     @endif
                 </ul>
-                {{--@if( auth()->user() )
+                @if( auth()->user() )
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button class="btn btn-dark botonSesion" type="submit">Cerrar sesión</button>
+                        <button class="btn btn-dark me-1" style="color: #FFFFFF8C" type="submit">Cerrar sesión</button>
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="btn btn-dark botonSesion">Iniciar sesión</a>
                 @endif
                 <span class="navbar-text">
                     {{ auth()->user()->name ?? 'Invitado' }}
-                </span>--}}
+                </span>
             </div>
         </div>
     </nav>

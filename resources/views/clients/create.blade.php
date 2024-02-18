@@ -12,7 +12,6 @@
                 {{ $error }} <br>
             @endforeach
         </div>
-        <br/>
     @endif
 
     <form action="{{ route("client.store") }}" method="post">
@@ -21,9 +20,21 @@
             <label for="name">Nombre:</label>
             <input class="form-control" id="name" name="name" type="text" required>
         </div>
-        <div class="form-group mb-3">
+        <div class="form-group">
+            <label for="surname">Apellido:</label>
+            <input class="form-control" id="surname" name="surname" type="text" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Teléfono:</label>
+            <input class="form-control" id="phone" name="phone" type="text" required>
+        </div>
+        <div class="form-group">
             <label for="email">Email:</label>
             <input class="form-control" id="email" name="email" type="email" step="0.01" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="password">Contraseña:</label>
+            <input class="form-control" id="password" name="password" type="password" required>
         </div>
 
         <button class="btn btn-primary" type="submit">Crear</button>
