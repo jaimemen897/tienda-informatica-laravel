@@ -17,7 +17,7 @@
         <form action="{{ route('employee.index') }}" class="mb-3" method="get">
             @csrf
             <div class="input-group">
-                <input type="text" class="form-control" id="search" name="search" placeholder="Nombre, email o número de teléfono">
+                <input type="text" class="form-control" id="search" name="search" placeholder="Nombre, email, número de teléfono o posición">
                 <div class="input-group-append">
                     <button class="btn btn-primary btn-search ms-2" type="submit">
                         <i class="bi bi-search"></i> Buscar
