@@ -5,6 +5,7 @@
 /public/storage
 /storage/*.key
 /vendor
+!/vendor/bin/sail
 .env
 .env.backup
 .env.production
