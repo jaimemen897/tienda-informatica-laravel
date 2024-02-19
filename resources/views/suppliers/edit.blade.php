@@ -27,7 +27,7 @@
                 <label for="contact">Contacto:</label>
                 <input class="form-control" id="contact" name="contact" type="text" required value="{{$supplier->contact}}">
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="address">Dirección:</label>
                 <input class="form-control" id="address" name="address" type="text" required value="{{$supplier->address}}">
             </div>
