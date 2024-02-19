@@ -1,7 +1,7 @@
-@php use App\Models\Client; @endphp
+@php use App\Models\Employee; @endphp
 @extends('main')
 
-@section('title', 'Clientes')
+@section('title', 'Empleados')
 
 @section('content')
     @if ($errors->any())
@@ -12,9 +12,9 @@
         </div>
     @endif
     <div class="container mt-4 mb-5">
-        <h1 class="mb-4">Listado de Clientes</h1>
+        <h1 class="mb-4">Listado de Empleados</h1>
 
-        <form action="{{ route('client.index') }}" class="mb-3" method="get">
+        <form action="{{ route('employee.index') }}" class="mb-3" method="get">
             @csrf
             <div class="input-group">
                 <input type="text" class="form-control" id="search" name="search" placeholder="Nombre, email o número de teléfono">
@@ -26,49 +26,49 @@
             </div>
         </form>
 
-        @if ( count($clients ?? []) > 0 )
+        @if ( count($employees ?? []) > 0 )
             <div class="row">
-                @foreach ($clients as $client)
+                @foreach ($employees as $employee)
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            @if($client->image != Client::$IMAGE_DEFAULT)
+                            @if($employee->image != Employee::$IMAGE_DEFAULT)
                                 <div class="divImage">
-                                    <img class="card-img-top" alt="Imagen del client"
-                                         src="{{ asset('storage/clients/' . $client->image) }}">
+                                    <img class="card-img-top" alt="Imagen del empleado"
+                                         src="{{ asset('storage/employees/' . $employee->image) }}">
                                 </div>
                             @else
                                 <div class="divImage">
-                                    <img alt="Imagen por defecto" src="{{ Client::$IMAGE_DEFAULT }}">
+                                    <img alt="Imagen por defecto" src="{{ Employee::$IMAGE_DEFAULT }}">
                                 </div>
                             @endif
                             <div class="card-body">
-                                <h5 class="card-title">{{ $client->name }} {{ $client->surname }}</h5>
-                                <p class="card-text">{{ $client->email }}</p>
-                                <p class="card-text">{{ $client->phone }}</p>
+                                <h5 class="card-title">{{ $employee->name }} {{ $employee->surname }}</h5>
+                                <p class="card-text">{{ $employee->email }}</p>
+                                <p class="card-text">{{ $employee->phone }}</p>
                                 <div class="d-flex flex-wrap">
                                     @if(auth()->user() && auth()->user()->role == 'admin')
                                         <div class="cajaBotones w-100">
-                                            <form action="{{ route('client.destroy', $client->id) }}" method="POST"
+                                            <form action="{{ route('employee.destroy', $employee->id) }}" method="POST"
                                                   class="me-1">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger botonCaja w-100"
-                                                        onclick="return confirm('¿Desea borrar este client?')">
+                                                        onclick="return confirm('¿Desea borrar este empleado?')">
                                                     <i class="bi bi-trash"></i> Borrar
                                                 </button>
                                             </form>
-                                            <a href="{{ route('client.edit', $client->id) }}"
+                                            <a href="{{ route('employee.edit', $employee->id) }}"
                                                class="btn btn-secondary botonCaja">
                                                 <i class="bi bi-pencil"></i> Editar
                                             </a>
-                                            <a href="{{ route('client.editImage', $client->id) }}"
+                                            <a href="{{ route('employee.editImage', $employee->id) }}"
                                                class="btn btn-info botonCaja">
                                                 <i class="bi bi-image"></i> Imagen
                                             </a>
                                         </div>
                                     @endif
                                     <div class="w-100">
-                                        <a href="{{ route('client.show', $client->id) }}"
+                                        <a href="{{ route('employee.show', $employee->id) }}"
                                            class="btn btn-primary botonCaja w-100">
                                             <i class="bi bi-eye"></i> Detalles
                                         </a>
@@ -80,19 +80,19 @@
                 @endforeach
             </div>
             @if(auth()->user() && auth()->user()->role == 'admin')
-                <a class="btn btn-success mt-4" href={{ route('client.store') }}><i class="bi bi-plus"></i> Nuevo
-                    Cliente</a>
+                <a class="btn btn-success mt-4" href={{ route('employee.store') }}><i class="bi bi-plus"></i> Nuevo
+                    Empleado</a>
             @endif
         @else
             <div class="alert alert-warning" role="alert">
                 <p class='mb-0'>
-                    No se encontraron clientes
+                    No se encontraron empleados
                 </p>
             </div>
         @endif
 
         <div class="pagination-container mt-4 d-flex justify-content-center">
-            {{ $clients->links('pagination::bootstrap-5') }}
+            {{ $employees->links('pagination::bootstrap-5') }}
         </div>
 
     </div>
