@@ -38,7 +38,7 @@
                 <label for="salary">Salario:</label>
                 <input class="form-control" id="salary" name="salary" type="number" step="0.01" required value="{{$employee->salary}}">
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="position">Posición:</label>
                 <select class="form-control" id="position" name="position" required>
                     <option value="">Seleccione una posición</option>
