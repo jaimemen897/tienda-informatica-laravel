@@ -52,24 +52,24 @@
                                                   class="me-1">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger botonCajaEmployee w-100"
+                                                <button type="submit" class="btn btn-danger botonCaja w-100"
                                                         onclick="return confirm('¿Desea borrar este empleado?')">
                                                     <i class="bi bi-trash"></i> Borrar
                                                 </button>
                                             </form>
                                             <a href="{{ route('employee.edit', $employee->id) }}"
-                                               class="btn btn-secondary botonCajaEmployee">
+                                               class="btn btn-secondary botonCaja">
                                                 <i class="bi bi-pencil"></i> Editar
                                             </a>
                                             <a href="{{ route('employee.editImage', $employee->id) }}"
-                                               class="btn btn-info botonCajaEmployee">
+                                               class="btn btn-info botonCaja">
                                                 <i class="bi bi-image"></i> Imagen
                                             </a>
                                         </div>
                                     @endif
                                     <div class="w-100">
                                         <a href="{{ route('employee.show', $employee->id) }}"
-                                           class="btn btn-primary botonCajaEmployee w-100">
+                                           class="btn btn-primary botonCaja w-100">
                                             <i class="bi bi-eye"></i> Detalles
                                         </a>
                                     </div>
