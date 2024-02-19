@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,4 +46,20 @@ Route::group(['prefix' => 'employee'], function () {
     Route::get('/{id}', [EmployeeController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('employee.show')->middleware(['auth', 'admin']);
 });
 
+
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth');
+
+Route::group(['prefix' => 'supplier'], function () {
+
+    Route::get('/', [SupplierController::class, 'index'])->name('supplier.index')->middleware(['auth', 'admin']);
+
+    Route::get('/create', [SupplierController::class, 'store'])->name('supplier.store')->middleware(['auth', 'admin']);
+    Route::post('/create', [SupplierController::class, 'create'])->name('supplier.create')->middleware(['auth', 'admin']);
+
+    Route::get('/edit/{id}', [SupplierController::class, 'edit'])->name('supplier.edit')->middleware(['auth', 'admin']);
+    Route::put('/update/{id}', [SupplierController::class, 'update'])->name('supplier.update')->middleware(['auth', 'admin']);
+
+    Route::delete('/destroy/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy')->middleware(['auth', 'admin']);
+
+    Route::get('/{id}', [SupplierController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('supplier.show')->middleware(['auth', 'admin']);
+});
