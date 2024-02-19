@@ -28,7 +28,6 @@ Route::group(['prefix' => 'client'], function () {
     Route::get('/{id}', [ClientController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('client.show')->middleware(['auth', 'admin']);
 });
 
-
 Route::group(['prefix' => 'employee'], function () {
     Route::get('/', [EmployeeController::class, 'index'])->name('employee.index')->middleware(['auth', 'admin']);
 
@@ -46,4 +45,4 @@ Route::group(['prefix' => 'employee'], function () {
     Route::get('/{id}', [EmployeeController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('employee.show')->middleware(['auth', 'admin']);
 });
 
-
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth');

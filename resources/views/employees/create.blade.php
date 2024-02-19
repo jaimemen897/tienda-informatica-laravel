@@ -18,23 +18,23 @@
         @csrf
         <div class="form-group">
             <label for="name">Nombre:</label>
-            <input class="form-control" id="name" name="name" type="text" required>
+            <input class="form-control" id="name" name="name" type="text" value="{{old("name")}}" required>
         </div>
         <div class="form-group">
             <label for="surname">Apellido:</label>
-            <input class="form-control" id="surname" name="surname" type="text" required>
+            <input class="form-control" id="surname" name="surname" type="text" value="{{old("surname")}}" required>
         </div>
         <div class="form-group">
             <label for="phone">Teléfono:</label>
-            <input class="form-control" id="phone" name="phone" type="text" required>
+            <input class="form-control" id="phone" name="phone" type="text" value="{{old("phone")}}" required>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input class="form-control" id="email" name="email" type="email" required>
+            <input class="form-control" id="email" name="email" type="email" value="{{old("email")}}" required>
         </div>
         <div class="form-group">
             <label for="salary">Salario:</label>
-            <input class="form-control" id="salary" name="salary" type="number" step="0.01" required>
+            <input class="form-control" id="salary" name="salary" type="number" step="0.01" value="{{old("salary")}}" required>
         </div>
         <div class="form-group">
             <label for="position">Posición:</label>

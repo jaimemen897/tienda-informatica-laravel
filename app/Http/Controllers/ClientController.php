@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -183,5 +184,11 @@ class ClientController extends Controller
             'password.min' => 'La contraseña debe tener mínimo 6 caracteres',
             'password.max' => 'La contraseña debe tener máximo 255 caracteres',
         ];
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('home')->with('user', $user);
     }
 }
