@@ -15,9 +15,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('client.index') }}">Clientes</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('employee.index') }}">Empleados</a>
+                    </li>
                     @if( auth()->user() && auth()->user()->role == 'admin' )
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('client.store') }}">Nuevo cliente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('employee.store') }}">Nuevo empleado</a>
                         </li>
                     @endif
                 </ul>
