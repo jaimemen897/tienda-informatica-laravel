@@ -2,53 +2,159 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Product::all();
+        $search = $request->get('search');
+        $products = Product::search($search)->paginate(9);
+        return view('products.index')
+            ->with('products', $products)
+            ->with('search', $search);
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+        return view('products.create')
+            ->with('categories', $categories);
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
             'name' => ['required'],
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:0'],
             'stock' => ['required'],
-            'image' => ['required'],
             'description' => ['required'],
-        ]);
+            'category_id' => ['required'],
+        ], $this->messages());
 
-        return Product::create($data);
+        Product::create($data);
+
+        flash('Producto creado correctamente')->success();
+
+        return redirect()->route('product.index');
     }
 
-    public function show(Product $product)
+    public function show($id)
     {
-        return $product;
+        $product = Product::find($id);
+        if (!$product) {
+            flash('No se ha encontrado el producto')->error();
+            return redirect()->route('product.index');
+        }
+        return view('products.show')
+            ->with('product', $product);
     }
 
-    public function update(Request $request, Product $product)
+    public function editImage($id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            flash('No se ha encontrado el producto')->error();
+            return redirect()->route('product.index');
+        }
+        return view('products.image')
+            ->with('product', $product);
+    }
+
+
+    public function updateImage(Request $request, $id)
+    {
+
+        $product = Product::find($id);
+
+        if (!$product) {
+            flash('No se ha encontrado el producto')->error();
+            return redirect()->route('product.index');
+        }
+        $data = $request->validate([
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ], $this->messages());
+
+        $diskStorage = Storage::disk('public');
+        $image = $request->file('image');
+        $extension = $image->extension();
+        $path = $diskStorage->putFileAs('products', $image, "$id.$extension");
+        if ($path) {
+            $product->image = $path;
+            $product->save();
+        } else {
+            flash('Error al subir la imagen')->error();
+            return redirect()->route('product.index');
+        }
+        flash('Imagen actualizada correctamente')->success();
+        return redirect()->route('product.index');
+    }
+
+    public function edit($id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            flash('No se ha encontrado el producto')->error();
+            return redirect()->route('product.index');
+        }
+        $categories = Category::all();
+        return view('products.edit')
+            ->with('product', $product)
+            ->with('categories', $categories);
+    }
+
+    public function update(Request $request, $id)
     {
         $data = $request->validate([
             'name' => ['required'],
             'price' => ['required', 'numeric'],
             'stock' => ['required'],
-            'image' => ['required'],
             'description' => ['required'],
+            'category_id' => ['required'],
         ]);
 
-        $product->update($data);
+        $product = Product::find($id);
 
+        if (!$product) {
+            flash('No se ha encontrado el producto')->error();
+            return redirect()->route('product.index');
+        }
+
+        $product->update($data);
+        flash('Producto actualizado correctamente')->success();
         return $product;
     }
 
-    public function destroy(Product $product)
+    public function destroy($id)
     {
+        $product = Product::find($id);
+        if (!$product) {
+            flash('No se ha encontrado el producto')->error();
+            return redirect()->route('product.index');
+        }
         $product->delete();
+        flash('Producto eliminado correctamente')->success();
+        return redirect()->route('product.index');
+    }
 
-        return response()->json();
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El nombre es requerido',
+            'price.required' => 'El precio es requerido',
+            'price.numeric' => 'El precio debe ser un número',
+            'price.min' => 'El precio debe ser mayor a 0',
+            'stock.required' => 'El stock es requerido',
+            'image.required' => 'La imagen es requerida',
+            'description.required' => 'La descripción es requerida',
+            'category_id.required' => 'La categoría es requerida',
+            'image.image' => 'El archivo debe ser una imagen',
+            'image.mimes' => 'El archivo debe ser una imagen de tipo: jpeg, png, jpg, gif, svg',
+            'image.max' => 'El archivo debe pesar menos de 2048 KB',
+        ];
     }
 }

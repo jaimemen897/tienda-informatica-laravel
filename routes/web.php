@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->route('client.index');
+    return redirect()->route('product.index');
 });
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -46,4 +47,19 @@ Route::group(['prefix' => 'employee'], function () {
     Route::get('/{id}', [EmployeeController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('employee.show')->middleware(['auth', 'admin']);
 });
 
+Route::group(['prefix' => 'products'], function () {
+    Route::get('/', [ProductController::class, 'index'])->name('product.index');
 
+    Route::get('/create', [ProductController::class, 'create'])->name('product.store')->middleware(['auth', 'admin']);
+    Route::post('/create', [ProductController::class, 'store'])->name('product.create')->middleware(['auth', 'admin']);
+
+    Route::get('/edit/{id}', [ProductController::class, 'edit'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('product.edit')->middleware(['auth', 'admin']);
+    Route::put('/update/{id}', [ProductController::class, 'update'])->name('product.update')->middleware(['auth', 'admin']);
+
+    Route::get('/editImage/{id}', [ProductController::class, 'editImage'])->name('product.editImage')->middleware(['auth', 'admin']);
+    Route::patch('/updateImage/{id}', [ProductController::class, 'updateImage'])->name('product.updateImage')->middleware(['auth', 'admin']);
+
+    Route::delete('/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
+
+    Route::get('/{id}', [ProductController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('product.show');
+});
