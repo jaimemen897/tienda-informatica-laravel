@@ -17,8 +17,8 @@
                 <dt class="col-sm-2">Email:</dt>
                 <dd class="col-sm-10">{{ $user->email }}</dd>
 
-                <dt class="col-sm-2">Rol:</dt>
-                <dd class="col-sm-10">{{ $user->role }}</dd>
+                <dt class="col-sm-2">Username:</dt>
+                <dd class="col-sm-10">{{ $user->username }}</dd>
 
                 <div class="mt-3">
                     <a class="btn btn-primary" href="{{ route('client.index') }}">Volver</a>

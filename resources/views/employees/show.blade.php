@@ -18,6 +18,9 @@
                 <dt class="col-sm-2">Apellido:</dt>
                 <dd class="col-sm-10">{{ $employee->surname }}</dd>
 
+                <dt class="col-sm-2">Username:</dt>
+                <dd class="col-sm-10">{{ $employee->username }}</dd>
+
                 <dt class="col-sm-2">Teléfono:</dt>
                 <dd class="col-sm-10">{{ $employee->phone }}</dd>
 

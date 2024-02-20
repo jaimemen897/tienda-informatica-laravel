@@ -20,14 +20,22 @@
             <div class="col-sm-6">
                 <dt class="col-sm-2">ID:</dt>
                 <dd class="col-sm-10">{{$client->id}}</dd>
+
                 <dt class="col-sm-2">Nombre:</dt>
                 <dd class="col-sm-10">{{$client->name}}</dd>
+
                 <dt class="col-sm-2">Apellidos:</dt>
                 <dd class="col-sm-10">{{$client->surname}}</dd>
+
+                <dt class="col-sm-2">Username:</dt>
+                <dd class="col-sm-10">{{$client->username}}</dd>
+
                 <dt class="col-sm-2">Teléfono:</dt>
                 <dd class="col-sm-10">{{$client->phone}}</dd>
+
                 <dt class="col-sm-2">Correo:</dt>
                 <dd class="col-sm-10">{{$client->email}}</dd>
+
                 <form action="{{ route("client.updateImage", $client->id) }}" method="post"
                       enctype="multipart/form-data">
                     @csrf
