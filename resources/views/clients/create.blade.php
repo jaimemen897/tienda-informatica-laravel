@@ -32,6 +32,10 @@
             <label for="email">Email:</label>
             <input class="form-control" id="email" name="email" type="email" step="0.01" value="{{ old('email') }}" required>
         </div>
+        <div class="form-group">
+            <label for="username">Nombre de usuario:</label>
+            <input class="form-control" id="username" name="username" type="text" value="{{ old('username') }}" required>
+        </div>
         <div class="form-group mb-3">
             <label for="password">Contraseña:</label>
             <input class="form-control" id="password" name="password" type="password" required>

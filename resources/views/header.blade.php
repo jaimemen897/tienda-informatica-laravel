@@ -30,16 +30,16 @@
                         </li>
                     @endif
                 </ul>
-                @if( auth()->user() )
+                @if( $user )
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button class="btn btn-dark me-1" style="color: #FFFFFF8C" type="submit">Cerrar sesión</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">Iniciar sesión</a>
+                    <a href="{{ route('login.client') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">Iniciar sesión</a>
                 @endif
                 <span class="navbar-text">
-                    {{ auth()->user()->name ?? 'Invitado' }}
+                    {{ $user->name ?? 'Invitado' }}
                 </span>
             </div>
         </div>

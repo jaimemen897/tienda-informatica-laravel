@@ -9,10 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminMiddleware
 {
-
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, $guard ="employee"): Response
     {
-        if (Auth::check() && Auth::user()->role === 'admin') {
+        if (Auth::guard($guard)->check()) {
             return $next($request);
         }
         return redirect()->back()->withErrors('No tienes permisos para acceder a esta página');
