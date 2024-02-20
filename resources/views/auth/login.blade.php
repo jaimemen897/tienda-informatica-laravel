@@ -1,9 +1,9 @@
-@extends('layouts.app')
+@extends('main')
+@section('title', 'Inicio de sesión')
 
 @section('content')
     <div class="container py-5">
         <div class="row justify-content-center">
-
             <div class="col-md-8">
                 @if(session('error'))
                     <div class="alert alert-danger">
@@ -42,10 +42,16 @@
 
                             <div class="d-flex justify-content-center gap-5">
                                 <button type="submit" class="btn btn-primary w-50">{{ __('Iniciar sesión') }}</button>
-                                <a href="{{ route('login.employee') }}" class="btn btn-secondary w-50">Iniciar sesión como empleado</a>
+                                <a href="{{ route('login.employee') }}" class="btn btn-secondary w-50">Iniciar sesión
+                                    como empleado</a>
+                            </div>
+
+                            <div class="d-flex justify-content-center mt-3">
+                                <a href="{{ route('register') }}" class="btn btn-link">¿No tienes una cuenta? Regístrate</a>
                             </div>
                         </form>
 
+                    </div>
                 </div>
             </div>
         </div>
