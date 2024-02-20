@@ -29,6 +29,11 @@ class Supplier extends Model
             ->orWhere('address', 'LIKE', "%$search%");
     }
 
+    protected function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public static function boot()
     {
         parent::boot();

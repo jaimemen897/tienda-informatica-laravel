@@ -22,6 +22,9 @@
                 <dt class="col-sm-2">Descripción:</dt>
                 <dd class="col-sm-10">{{ $product->description }}</dd>
 
+                <dt class="col-sm-2">Proveedor:</dt>
+                <dd class="col-sm-10">{{ $product->supplier->name }}</dd>
+
                 <div class="mt-3">
                     <a class="btn btn-primary" href="{{ route('product.index') }}">Volver</a>
                 </div>
