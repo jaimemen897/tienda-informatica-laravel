@@ -42,9 +42,10 @@
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('login.client') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">Iniciar sesión</a>
+                    <a href="{{ route('login.client') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">Iniciar
+                        sesión</a>
                 @endif
-                <span class="navbar-text"><a href="{{ route('profile.index') }}" class="nav-link">
+                <span class="navbar-text">
                     <a href="{{ route('profile.index') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">
                         <i class="bi bi-person-circle"></i> &nbsp;{{ $user->name ?? 'Invitado' }}
                     </a>
