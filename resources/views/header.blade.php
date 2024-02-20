@@ -13,7 +13,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 @if($user instanceof \App\Models\Employee)
                     <div class="dropdown flex-grow-1">
-                        <button class="btn btn-dark dropdown-toggle" style="color: #FFFFFF8C" type="button" data-bs-toggle="dropdown"
+                        <button class="btn btn-dark dropdown-toggle" style="color: #FFFFFF8C" type="button"
+                                data-bs-toggle="dropdown"
                                 aria-expanded="false">
                             Administración
                         </button>
@@ -47,10 +48,10 @@
                     </a>
                 </span>
                 @if($user)
-                    <div class="position-relative">
+                    <a href="{{route('cart.index')}}" class="position-relative">
                         <i class="bi bi-cart-fill" style="color: #FFFFFF8C; font-size: 1.5rem"></i>
                         <div class="bg-light rounded-circle cart-count">{{count(session('cart') ?? [])}}</div>
-                    </div>
+                    </a>
                 @endif
             </div>
         </div>

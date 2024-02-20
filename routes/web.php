@@ -108,6 +108,11 @@ Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])
 
 Route::group(['prefix' => 'cart'], function () {
     Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware(['auth:web,employee']);
+    Route::get('/', [CartController::class, 'viewCart'])->name('cart.index')->middleware(['auth:web,employee']);
+    Route::post('/increase', [CartController::class, 'increaseQuantity'])->name('cart.increase')->middleware(['auth:web,employee']);
+    Route::post('/decrease', [CartController::class, 'decreaseQuantity'])->name('cart.decrease')->middleware(['auth:web,employee']);
+    Route::delete('/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware(['auth:web,employee']);
+
 });
 
 Route::get('/factura', [App\Http\Controllers\ReportController::class, 'generatePDF'])->name('factura')->middleware('auth:employee,web');

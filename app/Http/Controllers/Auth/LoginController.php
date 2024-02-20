@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -23,8 +24,12 @@ class LoginController extends Controller
     {
         $cart = session('cart', []);
         foreach ($cart as $item) {
-            $item->product->stock += $item->quantity;
-            $item->product->save();
+            $product = Product::find($item->product->id);
+            if ($product === null) {
+                continue;
+            }
+            $product->stock += $item->quantity;
+            $product->save();
         }
         $this->guard()->logout();
 

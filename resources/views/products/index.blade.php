@@ -31,9 +31,16 @@
                 @foreach ($products as $product)
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <div class="divImage">
+                            <div class="divImage position-relative">
                                 <img class="card-img-top" alt="Imagen del client"
                                      src="{{ $product->getImageUrl() }}">
+                                @if($product->stock === '0')
+                                    <div
+                                        class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-secondary bg-opacity-75 rounded-top"
+                                        style="backdrop-filter: blur(7px)">
+                                        <h3 class="text-white m-0">Agotado</h3>
+                                    </div>
+                                @endif
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->name }}</h5>
@@ -72,7 +79,7 @@
                                         <form method="POST" class="w-100" action="{{route('cart.add')}}">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <button type="submit" class="btn btn-success botonCaja w-100">
+                                            <button type="submit" class="btn btn-success botonCaja w-100" {{$product->stock === '0' ? 'disabled' : ''}}>
                                                 <i class="bi bi-cart"></i> Añadir al carrito
                                             </button>
                                         </form>
