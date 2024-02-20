@@ -63,11 +63,20 @@
                                             </a>
                                         </div>
                                     @endif
-                                    <div class="w-100">
+                                    <div class="w-100 d-flex gap-2">
                                         <a href="{{ route('product.show', $product->id) }}"
                                            class="btn btn-primary botonCaja w-100">
                                             <i class="bi bi-eye"></i> Detalles
                                         </a>
+                                        @if($user)
+                                            <form method="POST">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <button type="submit" class="btn btn-success botonCaja w-100">
+                                                    <i class="bi bi-cart"></i> Añadir al carrito
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
