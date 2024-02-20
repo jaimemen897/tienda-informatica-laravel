@@ -109,3 +109,6 @@ Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])
 Route::group(['prefix' => 'cart'], function () {
     Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware(['auth:web,employee']);
 });
+
+Route::get('/factura', [App\Http\Controllers\ReportController::class, 'generatePDF'])->name('factura')->middleware('auth:employee,web');
+
