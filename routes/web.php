@@ -102,3 +102,6 @@ Route::group(['prefix' => 'supplier'], function () {
 });
 
 Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth:web,employee');
+
+Route::get('/factura', [App\Http\Controllers\ReportController::class, 'generatePDF'])->name('factura')->middleware('auth:employee,web');
+
