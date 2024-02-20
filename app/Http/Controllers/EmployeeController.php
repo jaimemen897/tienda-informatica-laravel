@@ -12,7 +12,7 @@ class EmployeeController extends Controller
 {
     public function index(Request $request)
     {
-        $employees = Employee::search($request->search)->orderBy('name', 'asc')->paginate(6);
+        $employees = Employee::search($request->search)->orderBy('name', 'asc')->paginate(8);
         if ($employees) {
             return view('employees.index')->with('employees', $employees);
         } else {

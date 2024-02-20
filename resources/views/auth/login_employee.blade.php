@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('main')
+@section('title', 'Inicio de sesión empleado')
 
 @section('content')
     <div class="container py-5">

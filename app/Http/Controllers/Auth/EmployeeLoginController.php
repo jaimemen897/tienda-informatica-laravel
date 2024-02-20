@@ -24,6 +24,9 @@ class EmployeeLoginController extends Controller
 
     public function showLoginForm()
     {
+        if (Auth::guard('employee')->check()) {
+            return redirect('/profile');
+        }
         return view('auth.login_employee');
     }
 }

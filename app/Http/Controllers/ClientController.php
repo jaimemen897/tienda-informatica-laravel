@@ -12,7 +12,7 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
-        $clients = Client::search($request->search)->orderBy('name', 'asc')->paginate(6);
+        $clients = Client::search($request->search)->orderBy('name', 'asc')->paginate(8);
         if ($clients){
             return view('clients.index')->with('clients', $clients);
         } else {

@@ -13,13 +13,14 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 @if($user instanceof \App\Models\Employee)
                     <div class="dropdown flex-grow-1">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        <button class="btn btn-dark dropdown-toggle" style="color: #FFFFFF8C" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                             Administración
                         </button>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('product.index') }}">Productos</a></li>
                             <li><a class="dropdown-item" href="{{ route('client.index') }}">Clientes</a></li>
-                            <li><a class="dropdown-item" href="{{ route('employee.index') }}">Empleado</a></li>
+                            <li><a class="dropdown-item" href="{{ route('employee.index') }}">Empleados</a></li>
                             <li><a class="dropdown-item" href="{{ route('supplier.index') }}">Proveedores</a></li>
                         </ul>
                     </div>

@@ -30,25 +30,33 @@
         @if ( count($clients ?? []) > 0 )
             <div class="row">
                 @foreach ($clients as $client)
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card">
                             @if($client->image != Client::$IMAGE_DEFAULT)
-                                <div class="divImage">
+                                <div class="divImagePerson">
                                     <img class="card-img-top" alt="Imagen del client"
                                          src="{{ asset('storage/clients/' . $client->image) }}">
                                 </div>
                             @else
-                                <div class="divImage">
+                                <div class="divImagePerson">
                                     <img alt="Imagen por defecto" src="{{ Client::$IMAGE_DEFAULT }}">
                                 </div>
                             @endif
                             <div class="card-body">
-                                <h5 class="card-title">{{ $client->name }} {{ $client->surname }}</h5>
-                                <p class="card-text">{{ $client->email }}</p>
+                                <h5 class="card-title text-truncate">{{ $client->name }} {{ $client->surname }}</h5>
+                                <p class="card-text text-truncate">{{ $client->email }}</p>
                                 <p class="card-text">{{ $client->phone }}</p>
                                 <div class="d-flex flex-wrap">
                                     @if($user instanceof \App\Models\Employee)
                                         <div class="cajaBotones w-100">
+                                            <a href="{{ route('client.edit', $client->id) }}"
+                                               class="btn btn-secondary botonCaja">
+                                                <i class="bi bi-pencil"></i> Editar
+                                            </a>
+                                            <a href="{{ route('client.editImage', $client->id) }}"
+                                               class="btn btn-info botonCaja">
+                                                <i class="bi bi-image"></i> Imagen
+                                            </a>
                                             <form action="{{ route('client.destroy', $client->id) }}" method="POST"
                                                   class="me-1">
                                                 @csrf
@@ -58,14 +66,6 @@
                                                     <i class="bi bi-trash"></i> Borrar
                                                 </button>
                                             </form>
-                                            <a href="{{ route('client.edit', $client->id) }}"
-                                               class="btn btn-secondary botonCaja">
-                                                <i class="bi bi-pencil"></i> Editar
-                                            </a>
-                                            <a href="{{ route('client.editImage', $client->id) }}"
-                                               class="btn btn-info botonCaja">
-                                                <i class="bi bi-image"></i> Imagen
-                                            </a>
                                         </div>
                                     @endif
                                     <div class="w-100">

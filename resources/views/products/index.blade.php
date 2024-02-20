@@ -38,12 +38,19 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <small class="card-text">{{$product->category->name}}</small>
-                                <p class="card-text">{{ $product->price }}€</p>
-                                <p class="card-text">{{ $product->stock }} unidades</p>
+                                <p class="card-text">{{ $product->price }}€ - {{ $product->stock }} unidades</p>
                                 <p class="card-text text-truncate">{{$product->description}}</p>
                                 <div class="d-flex flex-wrap">
                                     @if($user instanceof \App\Models\Employee)
                                         <div class="cajaBotones w-100">
+                                            <a href="{{ route('product.edit', $product->id) }}"
+                                               class="btn btn-secondary botonCaja">
+                                                <i class="bi bi-pencil"></i> Editar
+                                            </a>
+                                            <a href="{{ route('product.editImage', $product->id) }}"
+                                               class="btn btn-info botonCaja">
+                                                <i class="bi bi-image"></i> Imagen
+                                            </a>
                                             <form action="{{ route('product.destroy', $product->id) }}" method="POST"
                                                   class="me-1">
                                                 @csrf
@@ -53,14 +60,6 @@
                                                     <i class="bi bi-trash"></i> Borrar
                                                 </button>
                                             </form>
-                                            <a href="{{ route('product.edit', $product->id) }}"
-                                               class="btn btn-secondary botonCaja">
-                                                <i class="bi bi-pencil"></i> Editar
-                                            </a>
-                                            <a href="{{ route('product.editImage', $product->id) }}"
-                                               class="btn btn-info botonCaja">
-                                                <i class="bi bi-image"></i> Imagen
-                                            </a>
                                         </div>
                                     @endif
                                     <div class="w-100">
