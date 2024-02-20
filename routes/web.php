@@ -83,17 +83,4 @@ Route::group(['prefix' => 'supplier'], function () {
     Route::delete('/destroy/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy')->middleware(['auth', 'admin']);
 
     Route::get('/{id}', [SupplierController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('supplier.show')->middleware(['auth', 'admin']);
-    Route::get('/create', [ProductController::class, 'create'])->name('product.store')->middleware(['auth', 'admin']);
-    Route::post('/create', [ProductController::class, 'store'])->name('product.create')->middleware(['auth', 'admin']);
-
-    Route::get('/edit/{id}', [ProductController::class, 'edit'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('product.edit')->middleware(['auth', 'admin']);
-    Route::put('/update/{id}', [ProductController::class, 'update'])->name('product.update')->middleware(['auth', 'admin']);
-
-    Route::get('/editImage/{id}', [ProductController::class, 'editImage'])->name('product.editImage')->middleware(['auth', 'admin']);
-    Route::patch('/updateImage/{id}', [ProductController::class, 'updateImage'])->name('product.updateImage')->middleware(['auth', 'admin']);
-
-    Route::delete('/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth', 'admin']);
-
-    Route::get('/{id}', [ProductController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('product.show');
-
 });
