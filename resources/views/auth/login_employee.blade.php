@@ -11,7 +11,7 @@
                     </div>
                 @endif
                 <div class="card shadow">
-                    <div class="card-header bg-primary text-white">{{ __('Iniciar sesión') }}</div>
+                    <div class="card-header bg-primary text-white">{{ __('Iniciar sesión como empleado') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login.employee') }}">
@@ -40,10 +40,9 @@
                                 @enderror
                             </div>
 
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-light">
-                                    {{ __('Iniciar sesión') }}
-                                </button>
+                            <div class="d-flex justify-content-center gap-5">
+                                <button type="submit" class="btn btn-primary w-50">{{ __('Iniciar sesión') }}</button>
+                                <a href="{{ route('login.client') }}" class="btn btn-secondary w-50">Iniciar sesión como cliente</a>
                             </div>
                         </form>
                     </div>
