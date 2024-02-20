@@ -12,7 +12,7 @@
                 <dd class="col-sm-10">{{ $user->id }}</dd>
 
                 <dt class="col-sm-2">Nombre:</dt>
-                <dd class="col-sm-10">{{ $user->name }}</dd>
+                <dd class="col-sm-10">{{ $user->name }} {{ $user->surname }}</dd>
 
                 <dt class="col-sm-2">Email:</dt>
                 <dd class="col-sm-10">{{ $user->email }}</dd>
