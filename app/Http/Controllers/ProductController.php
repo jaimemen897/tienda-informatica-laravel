@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,10 @@ class ProductController extends Controller
     {
         $search = $request->get('search');
         $products = Product::search($search)->paginate(9);
+
+        $orderController = new OrderController();
+        $orders = $orderController->update($request, new Order());
+
         return view('products.index')
             ->with('products', $products)
             ->with('search', $search);
