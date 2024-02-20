@@ -47,6 +47,10 @@
                 <option value="Sales">Sales</option>
             </select>
         </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input class="form-control" id="username" name="username" type="text" value="{{old("username")}}" required>
+        </div>
         <div class="form-group mb-3">
             <label for="password">Contraseña:</label>
             <input class="form-control" id="password" name="password" type="password" required>

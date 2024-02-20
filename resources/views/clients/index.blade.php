@@ -17,7 +17,8 @@
         <form action="{{ route('client.index') }}" class="mb-3" method="get">
             @csrf
             <div class="input-group">
-                <input type="text" class="form-control" id="search" name="search" placeholder="Nombre, email o número de teléfono">
+                <input type="text" class="form-control" id="search" name="search"
+                       placeholder="Nombre, email o número de teléfono">
                 <div class="input-group-append">
                     <button class="btn btn-primary btn-search ms-2" type="submit">
                         <i class="bi bi-search"></i> Buscar
@@ -80,14 +81,12 @@
                 @endforeach
             </div>
             @if(auth()->user() && auth()->user()->role == 'admin')
-                <a class="btn btn-success mt-4" href={{ route('client.store') }}><i class="bi bi-plus"></i> Nuevo
-                    Cliente</a>
+                <a class="btn btn-success mt-4" href={{ route('client.store') }}>
+                    <i class="bi bi-plus"></i> Nuevo Cliente</a>
             @endif
         @else
             <div class="alert alert-warning" role="alert">
-                <p class='mb-0'>
-                    No se encontraron clientes
-                </p>
+                <p class='mb-0'>No se encontraron clientes</p>
             </div>
         @endif
 

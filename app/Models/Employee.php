@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class Employee extends Model
+
+class Employee extends Model implements AuthenticatableContract
 {
+    use Authenticatable;
     use HasFactory;
     use HasUUids;
     public static $IMAGE_DEFAULT = 'https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg';
@@ -23,10 +28,23 @@ class Employee extends Model
         'position',
         'email',
         'image',
+        'username',
         'password',
     ];
     protected $keyType = 'string';
     public $incrementing = false;
+
+
+
+    public function getEmailForPasswordReset()
+    {
+        return $this->email;
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
+    }
 
     public function scopeSearch($query, $search)
     {
@@ -34,6 +52,7 @@ class Employee extends Model
             ->orWhere('surname', 'LIKE', "%$search%")
             ->orWhere('phone', 'LIKE', "%$search%")
             ->orWhere('email', 'LIKE', "%$search%")
+            ->orWhere('username', 'LIKE', "%$search%")
             ->orWhere('position', 'LIKE', "%$search%");
     }
 
