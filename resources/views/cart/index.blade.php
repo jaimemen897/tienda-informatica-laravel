@@ -26,26 +26,27 @@
                                     <tr>
                                         <td>{{ $item->product->name }}</td>
                                         <td>{{ $item->product->price }}€</td>
-                                        <td>{{ $item->quantity }}</td>
-                                        <td>{{ $item->product->price * $item->quantity }}€</td>
-                                        <td class="d-flex gap-1">
-                                            <form method="post" action="{{route('cart.increase')}}">
-                                                @csrf
-                                                <input type="hidden" name="product_id" value="{{$item->product->id}}">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="bi bi-plus"></i>
-                                                    <span>Añadir uno</span>
-                                                </button>
-                                            </form>
+                                        <td class="d-flex gap-3  align-items-center"
+                                            style="font-variant-numeric: tabular-nums;">
                                             <form action="{{route('cart.decrease')}}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{$item->product->id}}">
-                                                <button type="submit" class="btn btn-warning"
+                                                <button type="submit" class="btn btn-secondary rounded-circle"
                                                         onclick="return confirm('¿Estás seguro de que desea quitar un {{$item->product->name}}?')">
                                                     <i class="bi bi-dash"></i>
-                                                    <span>Quitar uno</span>
                                                 </button>
                                             </form>
+                                            {{ $item->quantity }}
+                                            <form method="post" action="{{route('cart.increase')}}">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{$item->product->id}}">
+                                                <button type="submit" class="btn btn-success rounded-circle">
+                                                    <i class="bi bi-plus"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                        <td>{{ $item->product->price * $item->quantity }}€</td>
+                                        <td class="d-flex gap-1">
                                             <form action="{{route('cart.remove')}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
