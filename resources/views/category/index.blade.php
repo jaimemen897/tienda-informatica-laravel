@@ -1,7 +1,6 @@
-@php use App\Models\Supplier; @endphp
 @extends('main')
 
-@section('title', 'Proveedores')
+@section('title', 'Categorías')
 
 @section('content')
     @if ($errors->any())
@@ -12,13 +11,13 @@
         </div>
     @endif
     <div class="container mt-4 mb-5">
-        <h1 class="mb-4">Lista de Proveedores</h1>
+        <h1 class="mb-4">Lista de Categorías</h1>
 
-        <form action="{{ route('supplier.index') }}" class="mb-3" method="get">
+        <form action="{{ route('category.index') }}" class="mb-3" method="get">
             @csrf
             <div class="input-group">
                 <input type="text" class="form-control" id="search" name="search"
-                       placeholder="Nombre, Contacto, o Dirección">
+                       placeholder="Nombre">
                 <div class="input-group-append">
                     <button class="btn btn-primary btn-search ms-2" type="submit">
                         <i class="bi bi-search"></i> Buscar
@@ -27,39 +26,42 @@
             </div>
         </form>
 
-        @if ( count($suppliers ?? []) > 0 )
+        @if ( count($categories ?? []) > 0 )
             <table class="table">
                 <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Contacto</th>
-                    <th>Dirección</th>
-                    <th>Acciones</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($suppliers as $supplier)
+                @foreach ($categories as $category)
                     <tr>
-                        <td>{{ $supplier->name }}</td>
-                        <td>{{ $supplier->contact }}</td>
-                        <td>{{ $supplier->address }}</td>
+                        <td>{{ $category->name }}</td>
                         <td>
-                            <a href="{{ route('supplier.show', $supplier->id) }}" class="btn btn-primary">
+                            <a href="{{ route('category.show', $category->id) }}" class="btn btn-primary">
                                 <i class="bi bi-eye"></i> Detalles
                             </a>
-                            <a href="{{ route('supplier.create') }}" class="btn btn-success">
-                                <i class="bi bi-plus"></i> Crear
-                            </a>
-                            <a href="{{ route('supplier.edit', $supplier->id) }}" class="btn btn-secondary">
+                            <a href="{{ route('category.edit', $category->id) }}" class="btn btn-secondary">
                                 <i class="bi bi-pencil"></i> Editar
                             </a>
-                            <form action="{{ route('supplier.destroy', $supplier->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Desea borrar este proveedor?')">
-                                    <i class="bi bi-trash"></i> Borrar
-                                </button>
-                            </form>
+                            @if($category->trashed())
+                                <a href="{{route('category.activate', $category->id)}}"
+                                   class="btn btn-success">Activar</a>
+                            @else
+                                <a href="{{route('category.deactivate', $category->id)}}" class="btn btn-warning">Desactivar</a>
+                            @endif
+                            @if($category->products()->count() === 0)
+                                <form action="{{ route('category.destroy', $category->id) }}" method="POST"
+                                      class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"
+                                            onclick="return confirm('¿Desea borrar esta categoría?')">
+                                        <i class="bi bi-trash"></i> Borrar
+                                    </button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -68,13 +70,16 @@
         @else
             <div class="alert alert-warning" role="alert">
                 <p class='mb-0'>
-                    No se encontraron proveedores
+                    No se encontraron categorías
                 </p>
             </div>
         @endif
 
+        <a href="{{ route('category.store') }}" class="btn btn-success">
+            <i class="bi bi-plus"></i> Crear
+        </a>
         <div class="pagination-container mt-4 d-flex justify-content-center">
-            {{ $suppliers->links('pagination::bootstrap-5') }}
+            {{ $categories->links('pagination::bootstrap-5') }}
         </div>
 
     </div>
