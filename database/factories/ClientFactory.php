@@ -21,7 +21,6 @@ class ClientFactory extends Factory
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->email(),
             'image' => 'https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg',
-            'username' => $this->faker->userName(),
             'password' => bcrypt('password'),
         ];
     }

@@ -27,10 +27,6 @@
                 <input class="form-control" id="surname" name="surname" type="text" required value="{{$client->surname}}">
             </div>
             <div class="form-group">
-                <label for="username">Usuario:</label>
-                <input class="form-control" id="username" name="username" type="text" required value="{{$client->username}}">
-            </div>
-            <div class="form-group">
                 <label for="phone">Teléfono:</label>
                 <input class="form-control" id="phone" name="phone" type="text" required value="{{$client->phone}}">
             </div>

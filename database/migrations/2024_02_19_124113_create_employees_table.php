@@ -20,7 +20,6 @@ return new class extends Migration
             $table->enum('position', ['Manager', 'Developer', 'Designer', 'Tester', 'Sales']);
             $table->string('email')->unique();
             $table->string('image')->default('https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg');
-            $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

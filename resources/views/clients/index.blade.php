@@ -47,7 +47,7 @@
                                 <p class="card-text">{{ $client->email }}</p>
                                 <p class="card-text">{{ $client->phone }}</p>
                                 <div class="d-flex flex-wrap">
-                                    @if(auth()->user() && auth()->user()->role == 'admin')
+                                    @if($user instanceof \App\Models\Employee)
                                         <div class="cajaBotones w-100">
                                             <form action="{{ route('client.destroy', $client->id) }}" method="POST"
                                                   class="me-1">
@@ -80,7 +80,7 @@
                     </div>
                 @endforeach
             </div>
-            @if(auth()->user() && auth()->user()->role == 'admin')
+            @if($user instanceof \App\Models\Employee)
                 <a class="btn btn-success mt-4" href={{ route('client.store') }}>
                     <i class="bi bi-plus"></i> Nuevo Cliente</a>
             @endif

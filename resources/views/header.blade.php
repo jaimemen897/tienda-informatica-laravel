@@ -33,13 +33,18 @@
                 @if( $user )
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button class="btn btn-dark me-1" style="color: #FFFFFF8C" type="submit">Cerrar sesión</button>
+                        <button class="btn btn-dark me-1" style="color: #FFFFFF8C" type="submit">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Cerrar sesión
+                        </button>
                     </form>
                 @else
                     <a href="{{ route('login.client') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">Iniciar sesión</a>
                 @endif
                 <span class="navbar-text">
-                    {{ $user->name ?? 'Invitado' }}
+                    <a href="{{ route('profile.index') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">
+                        <i class="bi bi-person-circle"></i> &nbsp;{{ $user->name ?? 'Invitado' }}
+                    </a>
                 </span>
             </div>
         </div>
