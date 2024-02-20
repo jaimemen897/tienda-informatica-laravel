@@ -29,7 +29,6 @@ class Employee extends Model implements AuthenticatableContract
         'position',
         'email',
         'image',
-        'username',
         'password',
     ];
     protected $keyType = 'string';
@@ -56,7 +55,6 @@ class Employee extends Model implements AuthenticatableContract
             ->orWhere('surname', 'LIKE', "%$search%")
             ->orWhere('phone', 'LIKE', "%$search%")
             ->orWhere('email', 'LIKE', "%$search%")
-            ->orWhere('username', 'LIKE', "%$search%")
             ->orWhere('position', 'LIKE', "%$search%");
     }
 

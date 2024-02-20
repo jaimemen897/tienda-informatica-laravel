@@ -17,7 +17,7 @@
             @csrf
             <div class="input-group">
                 <input type="text" class="form-control" id="search" name="search" value="{{ $search ?? '' }}"
-                       placeholder="Nombre, email o número de teléfono">
+                       placeholder="Nombre">
                 <div class="input-group-append">
                     <button class="btn btn-primary btn-search ms-2" type="submit">
                         <i class="bi bi-search"></i> Buscar
@@ -42,7 +42,7 @@
                                 <p class="card-text">{{ $product->stock }} unidades</p>
                                 <p class="card-text text-truncate">{{$product->description}}</p>
                                 <div class="d-flex flex-wrap">
-                                    @if(auth()->user() && auth()->user()->role == 'admin')
+                                    @if($user instanceof \App\Models\Employee)
                                         <div class="cajaBotones w-100">
                                             <form action="{{ route('product.destroy', $product->id) }}" method="POST"
                                                   class="me-1">
@@ -75,15 +75,14 @@
                     </div>
                 @endforeach
             </div>
-            @if(auth()->user() && auth()->user()->role == 'admin')
-                <a class="btn btn-success mt-4" href={{ route('product.store') }}><i class="bi bi-plus"></i> Nuevo
-                    Producto</a>
+
+            @if($user instanceof \App\Models\Employee)
+                <a class="btn btn-success mt-4" href={{ route('product.store') }}>
+                    <i class="bi bi-plus"></i> Nuevo Producto</a>
             @endif
         @else
             <div class="alert alert-warning" role="alert">
-                <p class='mb-0'>
-                    No se encontraron productos
-                </p>
+                <p class='mb-0'>No se encontraron productos</p>
             </div>
         @endif
 

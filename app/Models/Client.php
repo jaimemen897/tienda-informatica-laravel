@@ -25,7 +25,6 @@ class Client extends Model implements AuthenticatableContract
         'phone',
         'email',
         'image',
-        'username',
         'password',
     ];
     protected $keyType = 'string';
@@ -53,7 +52,6 @@ class Client extends Model implements AuthenticatableContract
         return $query->where('name', 'LIKE', "%$search%")
             ->orWhere('surname', 'LIKE', "%$search%")
             ->orWhere('phone', 'LIKE', "%$search%")
-            ->orWhere('username', 'LIKE', "%$search%")
             ->orWhere('email', 'LIKE', "%$search%");
     }
 

@@ -74,7 +74,7 @@ Route::group(['prefix' => 'products'], function () {
 });
 
 
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth:employee');
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth:web,employee');
 
 Route::group(['prefix' => 'supplier'], function () {
 

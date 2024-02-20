@@ -18,9 +18,6 @@
                 <dt class="col-sm-2">Apellido:</dt>
                 <dd class="col-sm-10">{{ $client->surname }}</dd>
 
-                <dt class="col-sm-2">Usuario:</dt>
-                <dd class="col-sm-10">{{ $client->username }}</dd>
-
                 <dt class="col-sm-2">Teléfono:</dt>
                 <dd class="col-sm-10">{{ $client->phone }}</dd>
 
