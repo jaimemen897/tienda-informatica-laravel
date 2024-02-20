@@ -3,12 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Model;
+use Illuminate\Support\Str;
 
 
 class Client extends Model implements AuthenticatableContract
@@ -16,6 +16,7 @@ class Client extends Model implements AuthenticatableContract
     use HasFactory;
     use Authenticatable;
     use HasUUids;
+
     public static $IMAGE_DEFAULT = 'https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg';
     protected $fillable = [
         'id',
@@ -30,6 +31,11 @@ class Client extends Model implements AuthenticatableContract
     protected $keyType = 'string';
     public $incrementing = false;
 
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
 
 
     public function getEmailForPasswordReset()

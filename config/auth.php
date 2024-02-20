@@ -1,11 +1,13 @@
 <?php
 
 return [
-
+    'defaults' => [
+        'guard' => 'web',
+    ],
     'guards' => [
-        'client' => [
+        'web' => [
             'driver' => 'session',
-            'provider' => 'clients',
+            'provider' => 'clients'
         ],
 
         'employee' => [

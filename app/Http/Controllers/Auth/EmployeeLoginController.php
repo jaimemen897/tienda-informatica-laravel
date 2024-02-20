@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class EmployeeLoginController extends Controller
 {
     use AuthenticatesUsers;
 
@@ -18,8 +17,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function showClientLoginForm()
+    public function guard()
     {
-        return view('auth.login', ['url' => 'client']);
+        return Auth::guard('employee');
+    }
+
+    public function showLoginForm()
+    {
+        return view('auth.login_employee');
     }
 }

@@ -14,7 +14,7 @@
                     <div class="card-header bg-primary text-white">{{ __('Iniciar sesión') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('login.client') }}">
+                        <form method="POST" action="{{ route('login.employee') }}">
                             @csrf
 
                             <div class="mb-3">
