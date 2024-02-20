@@ -53,7 +53,7 @@
                 @if($user)
                     <div class="position-relative">
                         <i class="bi bi-cart-fill" style="color: #FFFFFF8C; font-size: 1.5rem"></i>
-                        <div class="bg-light rounded-circle cart-count">3</div>
+                        <div class="bg-light rounded-circle cart-count">{{count(session('cart') ?? [])}}</div>
                     </div>
                 @endif
             </div>

@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $products = Product::search($search)->paginate(9);
+        $products = Product::orderBy('id')->search($search)->paginate(9);
         return view('products.index')
             ->with('products', $products)
             ->with('search', $search);

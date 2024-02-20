@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
@@ -85,6 +86,11 @@ Route::group(['prefix' => 'categories'], function () {
     Route::post('/create', [CategoryController::class, 'store'])->name('category.create')->middleware(['auth:employee', 'admin']);
     Route::put('/update/{id}', [CategoryController::class, 'update'])->name('category.update')->middleware(['auth:employee', 'admin']);
     Route::delete('/destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy')->middleware(['auth:employee', 'admin']);
+});
+
+
+Route::group(['prefix' => 'cart'], function () {
+    Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware(['auth:web,employee']);
 });
 
 

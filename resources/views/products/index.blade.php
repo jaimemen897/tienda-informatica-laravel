@@ -68,16 +68,16 @@
                                            class="btn btn-primary botonCaja w-100">
                                             <i class="bi bi-eye"></i> Detalles
                                         </a>
-                                        @if($user)
-                                            <form method="POST">
-                                                @csrf
-                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                <button type="submit" class="btn btn-success botonCaja w-100">
-                                                    <i class="bi bi-cart"></i> Añadir al carrito
-                                                </button>
-                                            </form>
-                                        @endif
                                     </div>
+                                    @if($user)
+                                        <form method="POST" class="w-100" action="{{route('cart.add')}}">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" class="btn btn-success botonCaja w-100">
+                                                <i class="bi bi-cart"></i> Añadir al carrito
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
