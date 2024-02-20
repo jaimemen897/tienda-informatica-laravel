@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,6 +34,7 @@ class ProductController extends Controller
             'stock' => ['required'],
             'description' => ['required'],
             'category_id' => ['required'],
+            'supplier_id' => ['required'],
         ], $this->messages());
 
         Product::create($data);
@@ -101,9 +103,11 @@ class ProductController extends Controller
             return redirect()->route('product.index');
         }
         $categories = Category::all();
+        $suppliers = Supplier::all();
         return view('products.edit')
             ->with('product', $product)
-            ->with('categories', $categories);
+            ->with('categories', $categories)
+            ->with('suppliers', $suppliers);
     }
 
     public function update(Request $request, $id)
@@ -114,6 +118,7 @@ class ProductController extends Controller
             'stock' => ['required'],
             'description' => ['required'],
             'category_id' => ['required'],
+            'supplier_id' => ['required'],
         ]);
 
         $product = Product::find($id);
@@ -152,6 +157,7 @@ class ProductController extends Controller
             'image.required' => 'La imagen es requerida',
             'description.required' => 'La descripción es requerida',
             'category_id.required' => 'La categoría es requerida',
+            'supplier_id.required' => 'El proveedor es requerido',
             'image.image' => 'El archivo debe ser una imagen',
             'image.mimes' => 'El archivo debe ser una imagen de tipo: jpeg, png, jpg, gif, svg',
             'image.max' => 'El archivo debe pesar menos de 2048 KB',

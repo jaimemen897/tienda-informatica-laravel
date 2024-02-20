@@ -38,8 +38,9 @@
                 @else
                     <a href="{{ route('login') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">Iniciar sesión</a>
                 @endif
-                <span class="navbar-text">
+                <span class="navbar-text"><a href="{{ route('profile.index') }}" class="nav-link">
                     {{ auth()->user()->name ?? 'Invitado' }}
+                    </a>
                 </span>
             </div>
         </div>

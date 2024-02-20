@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,6 +17,7 @@ return new class extends Migration {
             $table->string('image');
             $table->string('description');
             $table->foreignIdFor(Category::class)->constrained('categories');
+            $table->foreignIdFor(Supplier::class)->constrained('suppliers');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -34,6 +34,15 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="supplier">Proveedor:</label>
+            <select class="form-select" id="supplier" name="supplier_id" required>
+                <option value="" disabled selected>Seleccione un proveedor</option>
+                @foreach($suppliers as $supplier)
+                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <label for="stock">Stock:</label>
             <input class="form-control" id="stock" name="stock" type="number" required value="{{old('stock')}}">
         </div>
