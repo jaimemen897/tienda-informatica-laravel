@@ -29,25 +29,33 @@
         @if ( count($employees ?? []) > 0 )
             <div class="row">
                 @foreach ($employees as $employee)
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <div class="card">
                             @if($employee->image != Employee::$IMAGE_DEFAULT)
-                                <div class="divImage">
+                                <div class="divImagePerson">
                                     <img class="card-img-top" alt="Imagen del empleado"
                                          src="{{ asset('storage/employees/' . $employee->image) }}">
                                 </div>
                             @else
-                                <div class="divImage">
+                                <div class="divImagePerson">
                                     <img alt="Imagen por defecto" src="{{ Employee::$IMAGE_DEFAULT }}">
                                 </div>
                             @endif
                             <div class="card-body">
-                                <h5 class="card-title">{{ $employee->name }} {{ $employee->surname }}</h5>
-                                <p class="card-text">{{ $employee->email }}</p>
+                                <h5 class="card-title text-truncate">{{ $employee->name }} {{ $employee->surname }}</h5>
+                                <p class="card-text text-truncate">{{ $employee->email }}</p>
                                 <p class="card-text">{{ $employee->phone }}</p>
                                 <div class="d-flex flex-wrap">
                                     @if($user instanceof \App\Models\Employee)
                                         <div class="cajaBotones w-100">
+                                            <a href="{{ route('employee.edit', $employee->id) }}"
+                                               class="btn btn-secondary botonCaja">
+                                                <i class="bi bi-pencil"></i> Editar
+                                            </a>
+                                            <a href="{{ route('employee.editImage', $employee->id) }}"
+                                               class="btn btn-info botonCaja">
+                                                <i class="bi bi-image"></i> Imagen
+                                            </a>
                                             <form action="{{ route('employee.destroy', $employee->id) }}" method="POST"
                                                   class="me-1">
                                                 @csrf
@@ -57,14 +65,6 @@
                                                     <i class="bi bi-trash"></i> Borrar
                                                 </button>
                                             </form>
-                                            <a href="{{ route('employee.edit', $employee->id) }}"
-                                               class="btn btn-secondary botonCaja">
-                                                <i class="bi bi-pencil"></i> Editar
-                                            </a>
-                                            <a href="{{ route('employee.editImage', $employee->id) }}"
-                                               class="btn btn-info botonCaja">
-                                                <i class="bi bi-image"></i> Imagen
-                                            </a>
                                         </div>
                                     @endif
                                     <div class="w-100">

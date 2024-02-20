@@ -11,28 +11,22 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('client.index') }}">Clientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('employee.index') }}">Empleados</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('supplier.index') }}">Proveedores</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('category.index') }}">Categorías</a>
-                    </li>
-                    @if( auth()->user() && auth()->user()->role == 'admin' )
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('client.store') }}">Nuevo cliente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('employee.store') }}">Nuevo empleado</a>
-                        </li>
-                    @endif
-                </ul>
+                @if($user instanceof \App\Models\Employee)
+                    <div class="dropdown flex-grow-1">
+                        <button class="btn btn-dark dropdown-toggle" style="color: #FFFFFF8C" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                            Administración
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('product.index') }}">Productos</a></li>
+                            <li><a class="dropdown-item" href="{{ route('client.index') }}">Clientes</a></li>
+                            <li><a class="dropdown-item" href="{{ route('employee.index') }}">Empleados</a></li>
+                            <li><a class="dropdown-item" href="{{ route('supplier.index') }}">Proveedores</a></li>
+                        </ul>
+                    </div>
+                @else
+                    <div class="flex-grow-1"></div>
+                @endif
                 @if( $user )
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
@@ -42,8 +36,10 @@
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('login.client') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">Iniciar
-                        sesión</a>
+                    <a href="{{ route('login.client') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">
+                        <i class="bi bi-box-arrow-in-right"></i>
+                        Iniciar sesión
+                    </a>
                 @endif
                 <span class="navbar-text">
                     <a href="{{ route('profile.index') }}" class="btn btn-dark me-1" style="color: #FFFFFF8C">

@@ -47,9 +47,6 @@
                             <a href="{{ route('supplier.show', $supplier->id) }}" class="btn btn-primary">
                                 <i class="bi bi-eye"></i> Detalles
                             </a>
-                            <a href="{{ route('supplier.create') }}" class="btn btn-success">
-                                <i class="bi bi-plus"></i> Crear
-                            </a>
                             <a href="{{ route('supplier.edit', $supplier->id) }}" class="btn btn-secondary">
                                 <i class="bi bi-pencil"></i> Editar
                             </a>

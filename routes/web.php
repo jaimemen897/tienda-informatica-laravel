@@ -16,13 +16,13 @@ Route::get('/', function () {
     return redirect()->route('product.index');
 });
 
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Auth::routes();
 Route::get('/login/employee', [App\Http\Controllers\Auth\EmployeeLoginController::class, 'showLoginForm'])->name('login.employee');
 Route::post('/login/employee', [App\Http\Controllers\Auth\EmployeeLoginController::class, 'login'])->name('login.employee.submit');
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showClientLoginForm'])->name('login.client');
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.client.submit');
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['prefix' => 'client'], function () {
     Route::get('/', [ClientController::class, 'index'])->name('client.index')->middleware(['auth:employee', 'admin']);
@@ -75,7 +75,6 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/{id}', [ProductController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('product.show');
 });
 
-
 Route::group(['prefix' => 'categories'], function () {
     Route::get('/', [CategoryController::class, 'index'])->name('category.index')->middleware(['auth:employee', 'admin']);
     Route::get('/create', [CategoryController::class, 'create'])->name('category.store')->middleware(['auth:employee', 'admin']);
@@ -89,12 +88,6 @@ Route::group(['prefix' => 'categories'], function () {
 });
 
 
-Route::group(['prefix' => 'cart'], function () {
-    Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware(['auth:web,employee']);
-});
-
-
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth:web,employee');
 
 Route::group(['prefix' => 'supplier'], function () {
 
@@ -106,7 +99,13 @@ Route::group(['prefix' => 'supplier'], function () {
     Route::get('/edit/{id}', [SupplierController::class, 'edit'])->name('supplier.edit')->middleware(['auth:employee', 'admin']);
     Route::put('/update/{id}', [SupplierController::class, 'update'])->name('supplier.update')->middleware(['auth:employee', 'admin']);
 
-    Route::delete('/destroy/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy')->middleware(['auth', 'admin']);
+    Route::delete('/destroy/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy')->middleware(['auth:employee', 'admin']);
 
-    Route::get('/{id}', [SupplierController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('supplier.show')->middleware(['auth', 'admin']);
+    Route::get('/{id}', [SupplierController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('supplier.show')->middleware(['auth:employee', 'admin']);
+});
+
+Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth:web,employee');
+
+Route::group(['prefix' => 'cart'], function () {
+    Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware(['auth:web,employee']);
 });
