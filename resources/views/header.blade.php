@@ -21,6 +21,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('supplier.index') }}">Proveedores</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('category.index') }}">Categorías</a>
+                    </li>
                     @if( auth()->user() && auth()->user()->role == 'admin' )
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('client.store') }}">Nuevo cliente</a>

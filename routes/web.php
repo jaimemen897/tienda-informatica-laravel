@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
 
@@ -71,6 +72,19 @@ Route::group(['prefix' => 'products'], function () {
     Route::delete('/destroy/{id}', [ProductController::class, 'destroy'])->name('product.destroy')->middleware(['auth:employee', 'admin']);
 
     Route::get('/{id}', [ProductController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('product.show');
+});
+
+
+Route::group(['prefix' => 'categories'], function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('category.index')->middleware(['auth:employee', 'admin']);
+    Route::get('/create', [CategoryController::class, 'create'])->name('category.store')->middleware(['auth:employee', 'admin']);
+    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit')->middleware(['auth:employee', 'admin']);
+    Route::get('/{id}', [CategoryController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('category.show')->middleware(['auth:employee', 'admin']);
+    Route::get('/deactivate/{id}', [CategoryController::class, 'deactivate'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('category.deactivate')->middleware(['auth:employee', 'admin']);
+    Route::get('/activate/{id}', [CategoryController::class, 'activate'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('category.activate')->middleware(['auth:employee', 'admin']);
+    Route::post('/create', [CategoryController::class, 'store'])->name('category.create')->middleware(['auth:employee', 'admin']);
+    Route::put('/update/{id}', [CategoryController::class, 'update'])->name('category.update')->middleware(['auth:employee', 'admin']);
+    Route::delete('/destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy')->middleware(['auth:employee', 'admin']);
 });
 
 
