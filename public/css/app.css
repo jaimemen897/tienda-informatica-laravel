@@ -19,13 +19,7 @@ footer {
     width: 100%;
 }
 
-#indexBody {
-    & footer {
-        position: relative;
-    }
-}
-
-.botonCaja {
+.botonCaja{
     margin: 4px 2px;
 }
 
@@ -67,8 +61,6 @@ footer {
         object-fit: contain;
     }
 }
-
-
 
 .cart-count {
     position: absolute;

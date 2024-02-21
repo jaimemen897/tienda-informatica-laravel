@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EmailController;
 use App\Models\Client;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -31,12 +32,15 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return Client::create([
+        $client = Client::create([
             'name' => $data['name'],
             'surname' => $data['surname'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+        $emailController = new EmailController($data['email']);
+        $emailController->sendWelcomeEmail();
+        return $client;
     }
 }

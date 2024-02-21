@@ -17,6 +17,12 @@
                 <dt class="col-sm-2">Email:</dt>
                 <dd class="col-sm-10">{{ $user->email }}</dd>
 
+                @if($user instanceof Employee)
+                    <dt class="col-sm-2">Posición:</dt>
+                    <dd class="col-sm-10">{{ $user->position }}</dd>
+                @endif
+
+
                 <div class="mt-3">
                     <a class="btn btn-primary" href="{{ route('client.index') }}">Volver</a>
                 </div>
