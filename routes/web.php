@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmailController;
 
 Route::get('/email', [EmailController::class, 'sendWelcomeEmail']);
-
+Route::get('/emailRestore', [EmailController::class, 'sendRestoreEmail'])->name('email.restore');
 Route::get('/', function () {
     return redirect()->route('product.index');
 });

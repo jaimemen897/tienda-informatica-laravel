@@ -69,6 +69,9 @@
                 </p>
             </div>
         @endif
+        <a class="btn btn-success mt-4" onclick="window.location='{{ route('supplier.create') }}'">
+            <i class="bi bi-plus"></i> Agregar Proveedor
+        </a>
 
         <div class="pagination-container mt-4 d-flex justify-content-center">
             {{ $suppliers->links('pagination::bootstrap-5') }}

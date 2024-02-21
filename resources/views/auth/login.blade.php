@@ -49,6 +49,7 @@
 
                             <div class="d-flex justify-content-center mt-3">
                                 <a href="{{ route('register') }}" class="btn btn-link">¿No tienes una cuenta? Regístrate</a>
+                                <a href="{{ route('email.restore') }}">{{ __('Reestablecer contraseña') }}</a>
                             </div>
                         </form>
 
