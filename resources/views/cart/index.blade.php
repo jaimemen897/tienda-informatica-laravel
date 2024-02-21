@@ -68,8 +68,11 @@
                             <div class="d-flex justify-content-end">
                                 <form action="{{route('cart.checkout')}}" method="post">
                                     @csrf
-                                    <button type="submit" class="btn btn-primary">Comprar</button>
+                                    <button type="submit" class="btn btn-primary">Tramitar pedido</button>
                                 </form>
+
+                                
+
                             </div>
                         @else
                             <h3>No hay productos en el carrito</h3>

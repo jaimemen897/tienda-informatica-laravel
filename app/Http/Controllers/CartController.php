@@ -192,8 +192,6 @@ class CartController extends Controller
 
     public function checkout()
     {
-        flash('Realizando compra')->success();
-
         $cart = session('cart', []);
 
         if (count($cart) <= 0) {
@@ -201,23 +199,8 @@ class CartController extends Controller
             return redirect()->back();
         }
 
-        $total = array_reduce($cart, function ($carry, $item) {
-            return $carry + $item->product->price * $item->quantity;
-        }, 0);
-
-        Order::create([
-            'userId' => auth()->user()->id,
-            'client' => json_encode(auth()->user()),
-            'lineOrders' => json_encode($cart),
-            'totalItems' => count($cart),
-            'total' => $total,
-        ]);
-
-        session(['cart' => []]);
-
-        flash('Compra realizada correctamente '.$total)->success();
-
-        return redirect()->back();
+        return view('checkout.index')
+            ->with('cart', $cart);
     }
 
 }

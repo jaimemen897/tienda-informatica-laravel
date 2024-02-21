@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SupplierController;
 
 use App\Http\Controllers\ProductController;
@@ -116,6 +118,12 @@ Route::group(['prefix' => 'cart'], function () {
     Route::post('/decrease', [CartController::class, 'decreaseQuantity'])->name('cart.decrease')->middleware(['auth:web,employee']);
     Route::delete('/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware(['auth:web,employee']);
     Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout')->middleware(['auth:web,employee']);
+});
+
+
+Route::group(['prefix' => 'checkout'], function () {
+    Route::get('/', [CheckoutController::class, 'index'])->name('checkout.index')->middleware(['auth:web,employee']);
+    Route::post('/complete', [CheckoutController::class, 'complete'])->name('checkout.complete')->middleware(['auth:web,employee']);
 });
 
 Route::get('/factura', [App\Http\Controllers\ReportController::class, 'generatePDF'])->name('factura')->middleware('auth:employee,web');

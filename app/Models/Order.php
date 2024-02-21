@@ -27,16 +27,6 @@ class Order extends Model
         'total',
     ];
 
-
-    public function update(array $attributes = [], array $options = [])
-    {
-        flash($attributes);
-//        $this->lineOrders = $attributes['lineOrders'];
-//        $this->totalItems = $attributes['totalItems'];
-//        $this->total = $attributes['total'];
-//        $this->save();
-    }
-
     public static function boot()
     {
         parent::boot();
