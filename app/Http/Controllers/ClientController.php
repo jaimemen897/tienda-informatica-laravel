@@ -12,7 +12,7 @@ class ClientController extends Controller
 {
     public function index(Request $request)
     {
-        $clients = Client::search($request->search)->orderBy('name', 'asc')->paginate(6);
+        $clients = Client::search($request->search)->orderBy('name', 'asc')->paginate(8);
         if ($clients){
             return view('clients.index')->with('clients', $clients);
         } else {
@@ -44,7 +44,6 @@ class ClientController extends Controller
             'surname' => 'required|string|max:255|min:2',
             'phone' => 'required|string|max:9|min:9',
             'email' => 'required|string|email|unique:clients,email',
-            'username' => 'required|string|max:255|min:2',
             'password' => 'required|string|min:6|max:255',
         ], $this->messages());
 
@@ -58,7 +57,6 @@ class ClientController extends Controller
         $client->phone = $request->phone;
         $client->email = $request->email;
         $client->image = $client::$IMAGE_DEFAULT;
-        $client->username = $request->username;
         $client->password = bcrypt($request->password);
         $client->save();
         flash('Cliente creado correctamente')->success();
@@ -85,7 +83,6 @@ class ClientController extends Controller
                 'surname' => 'string|max:255|min:2',
                 'phone' => 'string|max:9|min:9',
                 'email' => 'string|email|unique:clients,email,'.$id,
-                'username' => 'string|max:255|min:2',
                 'password' => 'string|min:6|max:255',
             ], $this->messages());
 
@@ -97,7 +94,6 @@ class ClientController extends Controller
             $client->surname = $request->surname;
             $client->phone = $request->phone;
             $client->email = $request->email;
-            $client->username = $request->username;
             $client->password = bcrypt($request->password);
             $client->save();
             flash('Cliente actualizado correctamente')->success();
@@ -183,10 +179,6 @@ class ClientController extends Controller
             'email.string' => 'El email debe ser una cadena de texto',
             'email.email' => 'El email debe ser un email válido',
             'email.unique' => 'El email ya está registrado',
-            'username.required' => 'El usuario es requerido',
-            'username.string' => 'El usuario debe ser una cadena de texto',
-            'username.max' => 'El usuario debe tener máximo 255 caracteres',
-            'username.min' => 'El usuario debe tener mínimo 2 caracteres',
             'password.required' => 'La contraseña es requerida',
             'password.string' => 'La contraseña debe ser una cadena de texto',
             'password.min' => 'La contraseña debe tener mínimo 6 caracteres',
@@ -197,6 +189,6 @@ class ClientController extends Controller
     public function profile()
     {
         $user = Auth::user();
-        return view('home')->with('user', $user);
+        return view('users.profile')->with('user', $user);
     }
 }

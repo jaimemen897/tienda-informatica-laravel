@@ -20,7 +20,8 @@ class Product extends Model
         'price',
         'stock',
         'description',
-        'category_id'
+        'category_id',
+        'supplier_id',
     ];
 
     protected $attributes = [
@@ -29,7 +30,12 @@ class Product extends Model
 
     protected function category(): BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->withTrashed();
+    }
+
+    protected function supplier(): BelongsTo
+    {
+        return $this->belongsTo(Supplier::class);
     }
 
     public function scopeSearch($query, $search)

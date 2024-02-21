@@ -17,7 +17,7 @@
             @csrf
             <div class="input-group">
                 <input type="text" class="form-control" id="search" name="search" value="{{ $search ?? '' }}"
-                       placeholder="Nombre, email o número de teléfono">
+                       placeholder="Nombre">
                 <div class="input-group-append">
                     <button class="btn btn-primary btn-search ms-2" type="submit">
                         <i class="bi bi-search"></i> Buscar
@@ -31,19 +31,33 @@
                 @foreach ($products as $product)
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <div class="divImage">
+                            <div class="divImage position-relative">
                                 <img class="card-img-top" alt="Imagen del client"
                                      src="{{ $product->getImageUrl() }}">
+                                @if($product->stock === '0')
+                                    <div
+                                        class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-secondary bg-opacity-75 rounded-top"
+                                        style="backdrop-filter: blur(7px)">
+                                        <h3 class="text-white m-0">Agotado</h3>
+                                    </div>
+                                @endif
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $product->name }}</h5>
                                 <small class="card-text">{{$product->category->name}}</small>
-                                <p class="card-text">{{ $product->price }}€</p>
-                                <p class="card-text">{{ $product->stock }} unidades</p>
+                                <p class="card-text">{{ $product->price }}€ - {{ $product->stock }} unidades</p>
                                 <p class="card-text text-truncate">{{$product->description}}</p>
                                 <div class="d-flex flex-wrap">
-                                    @if(auth()->user() && auth()->user()->role == 'admin')
+                                    @if($user instanceof \App\Models\Employee)
                                         <div class="cajaBotones w-100">
+                                            <a href="{{ route('product.edit', $product->id) }}"
+                                               class="btn btn-secondary botonCaja">
+                                                <i class="bi bi-pencil"></i> Editar
+                                            </a>
+                                            <a href="{{ route('product.editImage', $product->id) }}"
+                                               class="btn btn-info botonCaja">
+                                                <i class="bi bi-image"></i> Imagen
+                                            </a>
                                             <form action="{{ route('product.destroy', $product->id) }}" method="POST"
                                                   class="me-1">
                                                 @csrf
@@ -53,37 +67,37 @@
                                                     <i class="bi bi-trash"></i> Borrar
                                                 </button>
                                             </form>
-                                            <a href="{{ route('product.edit', $product->id) }}"
-                                               class="btn btn-secondary botonCaja">
-                                                <i class="bi bi-pencil"></i> Editar
-                                            </a>
-                                            <a href="{{ route('product.editImage', $product->id) }}"
-                                               class="btn btn-info botonCaja">
-                                                <i class="bi bi-image"></i> Imagen
-                                            </a>
                                         </div>
                                     @endif
-                                    <div class="w-100">
+                                    <div class="w-100 d-flex gap-2">
                                         <a href="{{ route('product.show', $product->id) }}"
                                            class="btn btn-primary botonCaja w-100">
                                             <i class="bi bi-eye"></i> Detalles
                                         </a>
                                     </div>
+                                    @if($user)
+                                        <form method="POST" class="w-100" action="{{route('cart.add')}}">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" class="btn btn-success botonCaja w-100" {{$product->stock === '0' ? 'disabled' : ''}}>
+                                                <i class="bi bi-cart"></i> Añadir al carrito
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-            @if(auth()->user() && auth()->user()->role == 'admin')
-                <a class="btn btn-success mt-4" href={{ route('product.store') }}><i class="bi bi-plus"></i> Nuevo
-                    Producto</a>
+
+            @if($user instanceof \App\Models\Employee)
+                <a class="btn btn-success mt-4" href={{ route('product.store') }}>
+                    <i class="bi bi-plus"></i> Nuevo Producto</a>
             @endif
         @else
             <div class="alert alert-warning" role="alert">
-                <p class='mb-0'>
-                    No se encontraron productos
-                </p>
+                <p class='mb-0'>No se encontraron productos</p>
             </div>
         @endif
 
