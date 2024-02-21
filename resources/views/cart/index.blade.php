@@ -66,13 +66,7 @@
                                 <h3>Total: {{ $total }}€</h3>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <form action="{{route('cart.checkout')}}" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary">Tramitar pedido</button>
-                                </form>
-
-                                
-
+                                <a href="{{ route('checkout.index') }}" type="submit" class="btn btn-primary">Tramitar pedido</a>
                             </div>
                         @else
                             <h3>No hay productos en el carrito</h3>

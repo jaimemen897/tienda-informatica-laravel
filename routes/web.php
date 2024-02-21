@@ -117,7 +117,6 @@ Route::group(['prefix' => 'cart'], function () {
     Route::post('/increase', [CartController::class, 'increaseQuantity'])->name('cart.increase')->middleware(['auth:web,employee']);
     Route::post('/decrease', [CartController::class, 'decreaseQuantity'])->name('cart.decrease')->middleware(['auth:web,employee']);
     Route::delete('/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware(['auth:web,employee']);
-    Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout')->middleware(['auth:web,employee']);
 });
 
 
