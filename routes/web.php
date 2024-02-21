@@ -10,6 +10,9 @@ use App\Http\Controllers\ProductController;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmailController;
+
+Route::get('/email', [EmailController::class, 'sendWelcomeEmail']);
 
 Route::get('/', function () {
     return redirect()->route('product.index');

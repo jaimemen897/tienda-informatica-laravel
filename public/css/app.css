@@ -19,12 +19,6 @@ footer {
     width: 100%;
 }
 
-#indexBody {
-    & footer {
-        position: relative;
-    }
-}
-
 .botonCaja{
     margin: 4px 2px;
 }
