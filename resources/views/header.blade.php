@@ -12,11 +12,31 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 @if($user instanceof \App\Models\Employee)
+                    @php
+                        $currentRoute = Route::currentRouteName();
+                        $section = 'Administración'; // valor por defecto
+
+                        switch ($currentRoute) {
+                            case 'product.index':
+                                $section = 'Productos';
+                                break;
+                            case 'client.index':
+                                $section = 'Clientes';
+                                break;
+                            case 'employee.index':
+                                $section = 'Empleados';
+                                break;
+                            case 'supplier.index':
+                                $section = 'Proveedores';
+                                break;
+                        }
+                    @endphp
+
                     <div class="dropdown flex-grow-1">
                         <button class="btn btn-dark dropdown-toggle" style="color: #FFFFFF8C" type="button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                            Administración
+                            {{ $section }}
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('product.index') }}">Productos</a></li>

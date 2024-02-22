@@ -17,7 +17,8 @@
         <form action="{{ route('employee.index') }}" class="mb-3" method="get">
             @csrf
             <div class="input-group">
-                <input type="text" class="form-control" id="search" name="search" placeholder="Nombre, email, número de teléfono o posición">
+                <input type="text" class="form-control" id="search" name="search"
+                       placeholder="Nombre, email, número de teléfono o posición">
                 <div class="input-group-append">
                     <button class="btn btn-primary btn-search ms-2" type="submit">
                         <i class="bi bi-search"></i> Buscar
@@ -33,12 +34,15 @@
                         <div class="card">
                             @if($employee->image != Employee::$IMAGE_DEFAULT)
                                 <div class="divImagePerson">
-                                    <img class="card-img-top" alt="Imagen del empleado"
-                                         src="{{ asset('storage/employees/' . $employee->image) }}">
+
+                                    <a href="{{ route('employee.show', $employee->id) }}">
+                                        <img alt="Imagen del empleado" src="{{ $employee->getImageUrl() }}">
+                                    </a>
                                 </div>
                             @else
                                 <div class="divImagePerson">
-                                    <img alt="Imagen por defecto" src="{{ Employee::$IMAGE_DEFAULT }}">
+                                    <a href="{{ route('employee.show', $employee->id) }}">
+                                        <img alt="Imagen por defecto" src="{{ Employee::$IMAGE_DEFAULT }}"> </a>
                                 </div>
                             @endif
                             <div class="card-body">

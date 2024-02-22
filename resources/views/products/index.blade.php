@@ -32,8 +32,9 @@
                     <div class="col-md-4 mb-4">
                         <div class="card">
                             <div class="divImage position-relative">
-                                <img class="card-img-top" alt="Imagen del client"
-                                     src="{{ $product->getImageUrl() }}">
+                                <a href="{{ route('product.show', $product->id) }}">
+                                    <img class="card-img-top" alt="Imagen del producto" src="{{ $product->getImageUrl() }}">
+                                </a>
                                 @if($product->stock === '0')
                                     <div
                                         class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-secondary bg-opacity-75 rounded-top"

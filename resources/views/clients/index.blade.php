@@ -34,12 +34,15 @@
                         <div class="card">
                             @if($client->image != Client::$IMAGE_DEFAULT)
                                 <div class="divImagePerson">
-                                    <img class="card-img-top" alt="Imagen del client"
-                                         src="{{ asset('storage/clients/' . $client->image) }}">
+                                    <a href="{{ route('client.show', $client->id) }}">
+                                        <img alt="Imagen del cliente" src="{{ $client->getImageUrl() }}">
+                                    </a>
                                 </div>
                             @else
                                 <div class="divImagePerson">
-                                    <img alt="Imagen por defecto" src="{{ Client::$IMAGE_DEFAULT }}">
+                                    <a href="{{ route('client.show', $client->id) }}">
+                                        <img alt="Imagen por defecto" src="{{ Client::$IMAGE_DEFAULT }}">
+                                    </a>
                                 </div>
                             @endif
                             <div class="card-body">
