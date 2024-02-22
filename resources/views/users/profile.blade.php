@@ -4,6 +4,8 @@
 @section('title', 'Home')
 
 @section('content')
+
+
     <div class="container">
         <h1>Perfil del usuario</h1>
         <dl class="row mt-4">
@@ -33,52 +35,47 @@
                     @if(count($orders) > 0)
                         @foreach($orders as $order)
                             <div class="card mb-3">
-{{--                                <img class="card-img-top" src="..." alt="Card image cap">--}}
                                 <div class="card-body">
-                                    <h5 class="card-title">{{$order->id}}</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <p class="card-text">Dirección de envío: {{$order->client->address->street}}, {{$order->client->address->number}}, {{$order->client->address->city}}, {{$order->client->address->zipCode}}, {{$order->client->address->state}}, {{$order->client->address->country}}</p>
                                     <p class="card-text"><small class="text-muted">Realizado el {{$order->created_at}}</small></p>
 
-                                    <div class="accordion" id="accordionExample">
+                                    <div class="accordion" id="accordionExample{{$loop->iteration}}">
                                         @if(count($order->lineOrders) > 0)
                                             @foreach($order->lineOrders as $lineOrder)
                                                 <div class="accordion-item">
-                                                    <h2 class="accordion-header" id="headingOne">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    <h2 class="accordion-header" id="heading{{$loop->parent->iteration}}{{$loop->iteration}}">
+                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$loop->parent->iteration}}{{$loop->iteration}}" aria-expanded="true" aria-controls="collapse{{$loop->parent->iteration}}{{$loop->iteration}}">
                                                             {{$lineOrder->product->name}}
                                                         </button>
                                                     </h2>
-                                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                    <div id="collapse{{$loop->parent->iteration}}{{$loop->iteration}}" class="accordion-collapse collapse" aria-labelledby="heading{{$loop->parent->iteration}}{{$loop->iteration}}" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             <div class="row">
                                                                 <div class="col-6">
-                                                                    <img src="{{asset('storage/products/'.$lineOrder->product->image)}}" alt="{{$lineOrder->product->name}}" class="img-fluid">
+                                                                    <img src="{{$lineOrder->product->image}}" alt="{{$lineOrder->product->name}}" class="img-fluid">
                                                                 </div>
                                                                 <div class="col-6">
-                                                                    <p>Precio: {{$lineOrder->product->productPrice}}€</p>
+                                                                    <a href="{{ route('product.show', $lineOrder->product->id) }}"><h3>{{$lineOrder->product->name}}</h3></a>
+                                                                    <p>Precio: {{$lineOrder->productPrice}}€</p>
                                                                     <p>Cantidad: {{$lineOrder->quantity}}</p>
-                                                                    <p>Subtotal: {{$lineOrder->product->productPrice * $lineOrder->quantity}}€</p>
+                                                                    <p>Subtotal: {{$lineOrder->productPrice * $lineOrder->quantity}}€</p>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                @if($loop->last)
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="headingOne">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                Total: {{$order->total}}€
-                                                            </button>
-                                                        </h2>
-                                                    </div>
-                                                @endif
-
                                             @endforeach
                                         @endif
+                                    </div>
+
+                                    <div>
+                                        <h2>Total: {{$order->total}}€</h2>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
+
+
                     @endif
                 </div>
             </div>

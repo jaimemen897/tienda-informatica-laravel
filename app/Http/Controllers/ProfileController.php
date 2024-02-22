@@ -19,7 +19,13 @@ class ProfileController extends Controller
             foreach ($order->lineOrders as $lineOrder) {
                 $lineOrder->product = Product::find($lineOrder->productId);
             }
+            $client = json_decode($order->client);
+            $order->client = $client;
+//            $address = json_decode($client->address);
+//            $order->client->address = $address;
         }
+
+        error_log($currentUserOrders);
 
         return view('users.profile')->with('user', $user)->with('orders', $currentUserOrders);
     }
