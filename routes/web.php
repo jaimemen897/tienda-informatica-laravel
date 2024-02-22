@@ -71,7 +71,6 @@ Route::post('/reset-password', function (Request $request) {
 })->name('password.update');
 
 Route::get('/email', [EmailController::class, 'sendWelcomeEmail']);
-Route::get('/emailRestore', [EmailController::class, 'sendRestoreEmail'])->name('email.restore');
 
 Route::group(['prefix' => 'login'], function () {
     Route::get('/employee', [App\Http\Controllers\Auth\EmployeeLoginController::class, 'showLoginForm'])->name('login.employee');

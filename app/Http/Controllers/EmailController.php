@@ -25,14 +25,4 @@ class EmailController extends Controller
 
         return "Email enviado correctamente!";
     }
-
-    public function sendRestoreEmail($token)
-    {
-        $title = 'Recuperación de contraseña';
-        $body = 'Hemos recibido una solicitud para restablecer la contraseña de tu cuenta. Si no has sido tú, por favor, ignora este mensaje.';
-
-        Mail::to($this->address)->send(new RestoreMail($title, $body, $token));
-
-        return "Email enviado correctamente!";
-    }
 }
