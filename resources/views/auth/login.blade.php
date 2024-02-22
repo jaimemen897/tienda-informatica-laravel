@@ -47,9 +47,10 @@
                                     como empleado</a>
                             </div>
 
-                            <div class="d-flex justify-content-center mt-3">
-                                <a href="{{ route('register') }}" class="btn btn-link">¿No tienes una cuenta? Regístrate</a>
-                                <a href="{{ route('email.restore') }}">{{ __('Reestablecer contraseña') }}</a>
+                            <div class="d-flex justify-content-center mt-3 gap-4">
+                                <a href="{{ route('register') }}">¿No tienes una cuenta? Regístrate</a>
+                                {{--link to restore--}}
+                                <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
                             </div>
                         </form>
 

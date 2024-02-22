@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EmailController;
-use http\Client;
+use App\Http\Controllers\TokenController;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -29,13 +28,21 @@ class ResetPasswordController extends Controller
         ]);
     }
 
-
-    protected function sendResetLinkResponse(array $data)
+    public function showLinkRequestForm()
     {
+        return view('auth.passwords.email');
+    }
 
-        Auth::user();
-        $email = $data['email'];
-        $emailController = new EmailController($email);
+    public function sendResetLinkEmail()
+    {
+        $tokenController = new TokenController();
+        $email = request('email');
+        $token = $tokenController->getToken();
+
+        $emailController = new EmailController($email, $token);
         $emailController->sendRestoreEmail();
+
+        $tokenController->showTokenForm();
+        return redirect('token/verify');
     }
 }

@@ -3,6 +3,7 @@
 return [
     'defaults' => [
         'guard' => 'web',
+        'passwords' => 'users',
     ],
     'guards' => [
         'web' => [
@@ -17,6 +18,10 @@ return [
     ],
 
     'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
         'clients' => [
             'driver' => 'eloquent',
             'model' => App\Models\Client::class,
@@ -29,6 +34,12 @@ return [
     ],
 
     'passwords' => [
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
         'clients' => [
             'provider' => 'clients',
             'table' => 'client_password_reset_tokens',

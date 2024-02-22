@@ -16,7 +16,7 @@ class RestoreMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(private string $title, private string $body)
+    public function __construct(private string $title, private string $body, private string $token)
     {
     }
 
@@ -41,6 +41,7 @@ class RestoreMail extends Mailable
             with: [
                 'title' => $this->title,
                 'body' => $this->body,
+                'token' => $this->token,
             ],
         );
     }

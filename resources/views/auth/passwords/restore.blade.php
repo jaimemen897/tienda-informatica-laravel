@@ -23,7 +23,7 @@
 
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Enviar enlace de restablecimiento de contraseña') }}
+                                    {{ 'Enviar enlace de restablecimiento de contraseña' }}
                                 </button>
                             </div>
                         </form>

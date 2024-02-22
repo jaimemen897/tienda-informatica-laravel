@@ -13,9 +13,20 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmailController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Models\Client;
+use App\Models\Employee;
+use App\Models\User;
+
 
 Route::get('/email', [EmailController::class, 'sendWelcomeEmail']);
-Route::get('/emailRestore', [EmailController::class, 'sendRestoreEmail'])->name('email.restore');
+/*Route::get('/emailRestore', [EmailController::class, 'sendRestoreEmail'])->name('email.restore');*/
+
+
 Route::get('/', function () {
     return redirect()->route('product.index');
 });
@@ -27,6 +38,65 @@ Route::get('/login/employee', [App\Http\Controllers\Auth\EmployeeLoginController
 Route::post('/login/employee', [App\Http\Controllers\Auth\EmployeeLoginController::class, 'login'])->name('login.employee.submit');
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showClientLoginForm'])->name('login.client');
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.client.submit');
+
+/*Route::get('password/email', [ResetPasswordController::class, 'showLinkRequestForm'])->name('password.email');
+Route::post('password/email', [ResetPasswordController::class, 'sendResetLinkEmail'])->name('password.email.submit');
+Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+Route::get('/password/verify', [ResetPasswordController::class, 'showResetForm'])->name('password.verify');
+
+Route::get('/token/verify', [App\Http\Controllers\TokenController::class, 'showTokenForm'])->name('token.verify');
+Route::post('/token/verify', [App\Http\Controllers\TokenController::class, 'verifyToken'])->name('token.verify.submit');
+Route::get('/password/change', [App\Http\Controllers\ChangePasswordController::class, 'showChangePasswordForm'])->name('password.reset');
+Route::post('/password/change', [App\Http\Controllers\ChangePasswordController::class, 'changePassword'])->name('password.reset.submit');*/
+Route::get('/forgot-password', function () {
+    return view('auth.passwords.restore');
+})->name('password.request');
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    return $status === Password::RESET_LINK_SENT
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->name('password.request.submit');
+
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('auth.passwords.create_new_pass', ['token' => $token]);
+})->name('password.reset');
+
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
+
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function (User $user, string $password) {
+            $user->forceFill([
+                'password' => Hash::make($password)
+            ])->setRememberToken(Str::random(60));
+
+            $user->save();
+
+            event(new PasswordReset($user));
+        }
+    );
+
+    return $status === Password::PASSWORD_RESET
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
+})->name('password.update');
+
+
+
+
 
 Route::group(['prefix' => 'client'], function () {
     Route::get('/', [ClientController::class, 'index'])->name('client.index')->middleware(['auth:employee', 'admin']);

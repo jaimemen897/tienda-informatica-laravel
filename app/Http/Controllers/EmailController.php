@@ -9,10 +9,12 @@ use Illuminate\Support\Facades\Mail;
 class EmailController extends Controller
 {
     protected $address;
+    public $token;
 
-    public function __construct($address)
+    public function __construct($address, $token)
     {
         $this->address = $address;
+        $this->token = $token;
     }
 
 
@@ -23,7 +25,7 @@ class EmailController extends Controller
 
         Mail::to($this->address)->send(new WelcomeMail($title, $body));
 
-        return "Email sent successfully!";
+        return "Email enviado correctamente!";
     }
 
     public function sendRestoreEmail()
@@ -31,8 +33,8 @@ class EmailController extends Controller
         $title = 'Recuperación de contraseña';
         $body = 'Hemos recibido una solicitud para restablecer la contraseña de tu cuenta. Si no has sido tú, por favor, ignora este mensaje.';
 
-        Mail::to($this->address)->send(new RestoreMail($title, $body));
+        Mail::to($this->address)->send(new RestoreMail($title, $body, $this->token));
 
-        return "Email sent successfully!";
+        return "Email enviado correctamente!";
     }
 }
