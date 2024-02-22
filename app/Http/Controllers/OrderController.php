@@ -2,15 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\order;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use stdClass;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return order::all();
+        $search = $request->get('search');
+//        $orders = Order::orderBy('id')->search($search)->paginate(9);
+        $orders = Order::where('client', 'like', '%' . $search . '%')->paginate(9);
+
+        foreach ($orders as $order) {
+            $order->lineOrders = json_decode($order->lineOrders);
+            foreach ($order->lineOrders as $lineOrder) {
+                $lineOrder->product = Product::find($lineOrder->productId);
+            }
+            $client = json_decode($order->client);
+            $order->client = $client;
+        }
+
+        return view('orders.index')
+            ->with('orders', $orders)
+            ->with('search', $search);
+    }
+
+    public function show($id)
+    {
+        $order = Order::find($id);
+        if (!$order) {
+            flash('No se ha encontrado el pedido')->error();
+            return redirect()->route('orders.index');
+        }
+
+        $order->lineOrders = json_decode($order->lineOrders);
+        foreach ($order->lineOrders as $lineOrder) {
+            $lineOrder->product = Product::find($lineOrder->productId);
+        }
+        $client = json_decode($order->client);
+        $order->client = $client;
+
+        return view('orders.show')
+            ->with('order', $order);
     }
 
     public function store(Request $request)
@@ -21,11 +56,6 @@ class OrderController extends Controller
         ]);
 
         return order::create($data);
-    }
-
-    public function show(order $order)
-    {
-        return $order;
     }
 
     public function update(Request $request, order $order)
@@ -63,10 +93,18 @@ class OrderController extends Controller
         return $order;
     }
 
-    public function destroy(order $order)
+    public function destroy($id)
     {
+        $order = Order::find($id);
+        if (!$order) {
+            return response()->json(['error' => 'No se ha encontrado el pedido'], 400);
+        }
+
         $order->delete();
 
-        return response()->json();
+        return redirect()->route('orders.index');
+
     }
+
+
 }

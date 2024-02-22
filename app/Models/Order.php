@@ -17,7 +17,7 @@ class Order extends Model
 
     protected $collection = 'orders';
 
-
+    protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'userId',

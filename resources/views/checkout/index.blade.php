@@ -45,7 +45,6 @@
                                 <label for="card_number">Número de tarjeta</label>
                                 <input type="text" id="card_number" name="card_number" class="form-control">
                             </div>
-                            <!-- Agrega más campos según sea necesario -->
 
                             <button type="submit" class="btn btn-primary mt-3">Realizar pago</button>
                         </form>

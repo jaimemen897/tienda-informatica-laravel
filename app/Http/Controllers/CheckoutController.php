@@ -18,7 +18,6 @@ class CheckoutController extends Controller
 
     public function complete(Request $request)
     {
-        flash('Realizando compra')->success();
 
         $cart = session('cart', []);
 
@@ -65,7 +64,7 @@ class CheckoutController extends Controller
 
         flash('Compra realizada correctamente '.$total)->success();
 
-        return redirect()->back();
+        return redirect()->route('profile.index');
     }
 
 }

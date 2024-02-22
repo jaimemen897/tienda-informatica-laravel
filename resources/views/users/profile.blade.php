@@ -40,15 +40,17 @@
                                     <p class="card-text"><small class="text-muted">Realizado el {{$order->created_at}}</small></p>
 
                                     <div class="accordion" id="accordionExample{{$loop->iteration}}">
+                                        @php $lineIteration = 0; @endphp
                                         @if(count($order->lineOrders) > 0)
                                             @foreach($order->lineOrders as $lineOrder)
+                                                @php $lineIteration++; @endphp
                                                 <div class="accordion-item">
-                                                    <h2 class="accordion-header" id="heading{{$loop->parent->iteration}}{{$loop->iteration}}">
-                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$loop->parent->iteration}}{{$loop->iteration}}" aria-expanded="true" aria-controls="collapse{{$loop->parent->iteration}}{{$loop->iteration}}">
+                                                    <h2 class="accordion-header" id="heading{{$loop->iteration}}{{$lineIteration}}">
+                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$lineOrder->product->id}}" aria-expanded="false" aria-controls="collapse{{$lineOrder->product->id}}">
                                                             {{$lineOrder->product->name}}
                                                         </button>
                                                     </h2>
-                                                    <div id="collapse{{$loop->parent->iteration}}{{$loop->iteration}}" class="accordion-collapse collapse" aria-labelledby="heading{{$loop->parent->iteration}}{{$loop->iteration}}" data-bs-parent="#accordionExample">
+                                                    <div id="collapse{{$lineOrder->product->id}}" class="accordion-collapse collapse" >
                                                         <div class="accordion-body">
                                                             <div class="row">
                                                                 <div class="col-6">
@@ -67,13 +69,10 @@
                                             @endforeach
                                         @endif
                                     </div>
-
-                                    <div>
-                                        <h2>Total: {{$order->total}}€</h2>
-                                    </div>
                                 </div>
                             </div>
                         @endforeach
+
 
 
                     @endif

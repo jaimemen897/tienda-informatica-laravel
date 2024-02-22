@@ -21,11 +21,7 @@ class ProfileController extends Controller
             }
             $client = json_decode($order->client);
             $order->client = $client;
-//            $address = json_decode($client->address);
-//            $order->client->address = $address;
         }
-
-        error_log($currentUserOrders);
 
         return view('users.profile')->with('user', $user)->with('orders', $currentUserOrders);
     }

@@ -125,5 +125,11 @@ Route::group(['prefix' => 'checkout'], function () {
     Route::post('/complete', [CheckoutController::class, 'complete'])->name('checkout.complete')->middleware(['auth:web,employee']);
 });
 
+Route::group(['prefix' => 'orders'], function () {
+    Route::get('/', [OrderController::class, 'index'])->name('orders.index')->middleware(['auth:employee', 'admin']);
+    Route::get('/{id}', [OrderController::class, 'show'])->name('orders.show')->middleware(['auth:employee', 'admin']);
+    Route::delete('/destroy/{id}', [OrderController::class, 'destroy'])->name('orders.destroy')->middleware(['auth:employee', 'admin']);
+});
+
 Route::get('/factura', [App\Http\Controllers\ReportController::class, 'generatePDF'])->name('factura')->middleware('auth:employee,web');
 
