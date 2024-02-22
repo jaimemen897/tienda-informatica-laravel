@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\EmailController;
 use App\Models\Client;
-use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -25,9 +24,12 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'surname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:clients'],
+            'phone' => ['required', 'regex:/^[6-9]\d{8}$/'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        ], $this->messages());
+
     }
 
     protected function create(array $data)
@@ -42,5 +44,23 @@ class RegisterController extends Controller
         $emailController = new EmailController($data['email'],);
         $emailController->sendWelcomeEmail();
         return $client;
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'El nombre es obligatorio',
+            'name.string' => 'El nombre no es válido',
+            'surname.required' => 'El apellido es obligatorio',
+            'surname.string' => 'El apellido no es válido',
+            'email.required' => 'El email es obligatorio',
+            'email.email' => 'El email no es válido',
+            'email.unique' => 'El email ya está en uso',
+            'phone.required' => 'El teléfono es obligatorio',
+            'phone.regex' => 'El teléfono no es válido',
+            'password.required' => 'La contraseña es obligatoria',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres',
+            'password.confirmed' => 'Las contraseñas no coinciden',
+        ];
     }
 }
