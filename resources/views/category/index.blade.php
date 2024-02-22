@@ -31,14 +31,22 @@
                 <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th></th>
+                    <th class="px-5">Estado</th>
+                    <th class="pl-5">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($categories as $category)
                     <tr>
                         <td>{{ $category->name }}</td>
-                        <td>
+                        <td class="px-5">
+                            @if($category->trashed())
+                                <span class="badge bg-danger">Desactivada</span>
+                            @else
+                                <span class="badge bg-success">Activa</span>
+                            @endif
+                        </td>
+                        <td class="pl-5">
                             <a href="{{ route('category.show', $category->id) }}" class="btn btn-primary">
                                 <i class="bi bi-eye"></i> Detalles
                             </a>
@@ -67,16 +75,17 @@
                 @endforeach
                 </tbody>
             </table>
+
         @else
             <div class="alert alert-warning" role="alert">
                 <p class='mb-0'>
-                    No se encontraron categorías
+                    No se han encontrado categorías
                 </p>
             </div>
         @endif
 
         <a href="{{ route('category.store') }}" class="btn btn-success">
-            <i class="bi bi-plus"></i> Crear
+            <i class="bi bi-plus"></i> Nueva Categoría
         </a>
         <div class="pagination-container mt-4 d-flex justify-content-center">
             {{ $categories->links('pagination::bootstrap-5') }}

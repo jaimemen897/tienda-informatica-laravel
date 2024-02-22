@@ -15,7 +15,7 @@
 
     <form action="{{ route("category.store") }}" method="post">
         @csrf
-        <div class="form-group">
+        <div class="form-group mb-3">
             <label for="name">Nombre:</label>
             <input class="form-control" id="name" name="name" type="text" required>
         </div>

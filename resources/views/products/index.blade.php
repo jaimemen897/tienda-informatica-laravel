@@ -50,17 +50,17 @@
                                 <p class="card-text text-truncate">{{$product->description}}</p>
                                 <div class="d-flex flex-wrap">
                                     @if($user instanceof \App\Models\Employee)
-                                        <div class="cajaBotones w-100">
+                                        <div class="cajaBotones d-flex w-100">
                                             <a href="{{ route('product.edit', $product->id) }}"
-                                               class="btn btn-secondary botonCaja">
+                                               class="btn btn-secondary botonCaja flex-fill">
                                                 <i class="bi bi-pencil"></i> Editar
                                             </a>
                                             <a href="{{ route('product.editImage', $product->id) }}"
-                                               class="btn btn-info botonCaja">
+                                               class="btn btn-info botonCaja flex-fill">
                                                 <i class="bi bi-image"></i> Imagen
                                             </a>
                                             <form action="{{ route('product.destroy', $product->id) }}" method="POST"
-                                                  class="me-1">
+                                                  class="me-1 flex-fill">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger botonCaja w-100"
