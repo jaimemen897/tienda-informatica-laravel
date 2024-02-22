@@ -32,8 +32,8 @@
                 <input class="form-control" id="address" name="address" type="text" required value="{{$supplier->address}}">
             </div>
 
-            <button class="btn btn-primary" type="submit">Actualizar</button>
-            <a class="btn btn-secondary mx-2" href="{{ route('supplier.index') }}">Volver</a>
+            <button class="btn btn-primary mb-5" type="submit">Actualizar</button>
+            <a class="btn btn-secondary mx-2 mb-5" href="{{ route('supplier.index') }}">Volver</a>
         </form>
     </div>
 @endsection

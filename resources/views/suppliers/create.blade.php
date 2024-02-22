@@ -30,7 +30,7 @@
             <input class="form-control" id="address" name="address" type="text" required>
         </div>
 
-        <button class="btn btn-primary" type="submit">Crear</button>
-        <a class="btn btn-secondary mx-2" href="{{ route('supplier.index') }}">Volver</a>
+        <button class="btn btn-primary mb-5" type="submit">Crear</button>
+        <a class="btn btn-secondary mx-2 mb-5" href="{{ route('supplier.index') }}">Volver</a>
     </form>
 @endsection

@@ -24,7 +24,7 @@
 
 
                 <div class="mt-3">
-                    <a class="btn btn-primary" href="{{ route('client.index') }}">Volver</a>
+                    <a class="btn btn-primary mb-5" href="{{ route('client.index') }}">Volver</a>
                 </div>
             </div>
             <div class="col-sm-6">

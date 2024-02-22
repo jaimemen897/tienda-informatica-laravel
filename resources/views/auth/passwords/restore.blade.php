@@ -1,6 +1,11 @@
 @extends('main')
 
 @section('content')
+    @if (session('status'))
+        <div class="alert alert-success alert-dismissible">
+            {{ session('status') }}
+        </div>
+    @endif
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -13,7 +18,8 @@
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">{{ __('Email') }}</label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                       name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                                 @error('email')
                                 <div class="invalid-feedback">
                                     {{ $message }}

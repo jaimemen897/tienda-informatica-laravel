@@ -25,11 +25,11 @@
                 <dd class="col-sm-10">{{ $client->email }}</dd>
 
                 <div class="mt-3">
-                    <a class="btn btn-primary" href="{{ route('client.index') }}">Volver</a>
+                    <a class="btn btn-primary mb-5" href="{{ route('client.index') }}">Volver</a>
                 </div>
             </div>
             <div class="col-sm-6">
-                <dt class="col-sm-2">Imagen:</dt>
+
                 <dd class="col-sm-10">
                     @if($client->image != Client::$IMAGE_DEFAULT)
                         <img alt="Imagen del client" class="img-fluid" src="{{ asset('storage/clients/' . $client->image) }}" width="280" height="280">

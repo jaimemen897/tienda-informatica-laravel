@@ -21,8 +21,8 @@
                 <label for="name">Nombre:</label>
                 <input class="form-control" id="name" name="name" type="text" required value="{{$category->name}}">
             </div>
-            <button class="btn btn-primary" type="submit">Actualizar</button>
-            <a class="btn btn-secondary mx-2" href="{{ route('category.index') }}">Volver</a>
+            <button class="btn btn-primary mb-5" type="submit">Actualizar</button>
+            <a class="btn btn-secondary mx-2 mb-5" href="{{ route('category.index') }}">Volver</a>
         </form>
     </div>
 @endsection

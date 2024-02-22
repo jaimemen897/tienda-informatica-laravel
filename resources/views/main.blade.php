@@ -19,7 +19,7 @@
 
 @include('header')
 
-<div class="container min-vh-100">
+<div class="container">
 
     <div class="mx-2 my-2">
         @include('flash::message')

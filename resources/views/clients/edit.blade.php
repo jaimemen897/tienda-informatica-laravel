@@ -35,8 +35,8 @@
                 <input class="form-control" id="email" name="email" type="email" required value="{{$client->email}}">
             </div>
 
-            <button class="btn btn-primary" type="submit">Actualizar</button>
-            <a class="btn btn-secondary mx-2" href="{{ route('client.index') }}">Volver</a>
+            <button class="btn btn-primary mb-5" type="submit">Actualizar</button>
+            <a class="btn btn-secondary mx-2 mb-5" href="{{ route('client.index') }}">Volver</a>
         </form>
     </div>
 @endsection

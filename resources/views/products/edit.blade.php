@@ -12,8 +12,7 @@
             @endforeach
         </div>
     @endif
-
-    <form action="{{ route("product.update", $product->id) }}" method="post">
+    <form action="{{ route("product.update", $product->id) }}" method="post" class="mb-5">
         @csrf
         @method('PUT')
         <div class="form-group">
@@ -53,8 +52,8 @@
                       required>{{$product->description}}</textarea>
         </div>
 
-        <button class="btn btn-primary" type="submit">Crear</button>
-        <a class="btn btn-secondary mx-2" href="{{ route('product.index') }}">Volver</a>
+        <button class="btn btn-primary mb-5" type="submit">Crear</button>
+        <a class="btn btn-secondary mx-2 mb-5" href="{{ route('product.index') }}">Volver</a>
     </form>
 
 @endsection

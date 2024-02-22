@@ -26,11 +26,10 @@
                 <dd class="col-sm-10">{{ $product->supplier->name }}</dd>
 
                 <div class="mt-3">
-                    <a class="btn btn-primary" href="{{ route('product.index') }}">Volver</a>
+                    <a class="btn btn-primary mb-5" href="{{ route('product.index') }}">Volver</a>
                 </div>
             </div>
             <div class="col-sm-6">
-                <dt class="col-sm-2">Imagen:</dt>
                 <dd class="col-sm-10">
                     <img alt="Imagen del producto" class="img-fluid" src="{{ $product->getImageUrl() }}" width="280"
                          height="280">

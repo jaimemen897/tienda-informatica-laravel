@@ -36,12 +36,11 @@
                         <small class="text-danger"></small>
                     </div>
 
-                    <button class="btn btn-primary" type="submit">Actualizar</button>
-                    <a class="btn btn-secondary mx-2" href="{{ route('product.index') }}">Volver</a>
+                    <button class="btn btn-primary mb-5" type="submit">Actualizar</button>
+                    <a class="btn btn-secondary mx-2 mb-5" href="{{ route('product.index') }}">Volver</a>
                 </form>
             </div>
             <div class="col-sm-6">
-                <dt class="col-sm-2">Imagen:</dt>
                 <dd class="col-sm-10">
                     <img alt="Imagen del client" class="img-fluid"
                          src="{{ $product->getImageUrl() }}"

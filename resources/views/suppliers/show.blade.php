@@ -31,7 +31,7 @@
 
             </div>
             <div class="mt-3">
-                <a class="btn btn-primary" href="{{ route('supplier.index') }}">Volver</a>
+                <a class="btn btn-primary mb-5" href="{{ route('supplier.index') }}">Volver</a>
             </div>
         </dl>
     </div>

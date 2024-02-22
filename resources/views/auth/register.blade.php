@@ -3,7 +3,7 @@
 @section('content')
     <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-8 mb-5">
                 <div class="card shadow">
                     <div class="card-header bg-primary text-white">{{ __('Registro') }}</div>
 
@@ -67,7 +67,7 @@
                             </div>
 
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-p">
+                                <button type="submit" class="btn btn-primary">
                                     {{ __('Registrarse') }}
                                 </button>
                             </div>
