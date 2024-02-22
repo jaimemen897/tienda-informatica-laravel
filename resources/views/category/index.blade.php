@@ -50,7 +50,7 @@
                             <a href="{{ route('category.show', $category->id) }}" class="btn btn-primary">
                                 <i class="bi bi-eye"></i> Detalles
                             </a>
-                            <a href="{{ route('category.edit', $category->id) }}" class="btn btn-secondary">
+                            <a href="{{ route('category.edit', $category->id) }}" class="btn btnEdit">
                                 <i class="bi bi-pencil"></i> Editar
                             </a>
                             @if($category->trashed())

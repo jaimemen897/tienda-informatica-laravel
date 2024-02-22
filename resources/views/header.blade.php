@@ -74,7 +74,7 @@
                 @if($user)
                     <a href="{{route('cart.index')}}" class="position-relative">
                         <i class="bi bi-cart-fill" style="color: #FFFFFF8C; font-size: 1.5rem"></i>
-                        <div class="bg-light rounded-circle cart-count">{{count(session('cart') ?? [])}}</div>
+                        <div class="bg-body text-dark rounded-circle cart-count"> {{ count(session('cart') ?? []) }}</div>
                     </a>
                 @endif
             </div>

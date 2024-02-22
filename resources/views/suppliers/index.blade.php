@@ -47,7 +47,7 @@
                             <a href="{{ route('supplier.show', $supplier->id) }}" class="btn btn-primary">
                                 <i class="bi bi-eye"></i> Detalles
                             </a>
-                            <a href="{{ route('supplier.edit', $supplier->id) }}" class="btn btn-secondary">
+                            <a href="{{ route('supplier.edit', $supplier->id) }}" class="btn btnEdit">
                                 <i class="bi bi-pencil"></i> Editar
                             </a>
                             <form action="{{ route('supplier.destroy', $supplier->id) }}" method="POST" class="d-inline">

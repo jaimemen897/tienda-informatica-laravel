@@ -33,7 +33,8 @@
                         <div class="card">
                             <div class="divImage position-relative">
                                 <a href="{{ route('product.show', $product->id) }}">
-                                    <img class="card-img-top" alt="Imagen del producto" src="{{ $product->getImageUrl() }}">
+                                    <img class="card-img-top" alt="Imagen del producto"
+                                         src="{{ $product->getImageUrl() }}">
                                 </a>
                                 @if($product->stock === '0')
                                     <div
@@ -48,16 +49,16 @@
                                 <small class="card-text">{{$product->category->name}}</small>
                                 <p class="card-text">{{ $product->price }}€ - {{ $product->stock }} unidades</p>
                                 <p class="card-text text-truncate">{{$product->description}}</p>
-                                <div class="d-flex flex-wrap">
+                                <div class="d-flex flex-wrap gap-1">
                                     @if($user instanceof \App\Models\Employee)
-                                        <div class="cajaBotones d-flex w-100">
+                                        <div class="cajaBotones d-flex w-100 gap-1">
                                             <a href="{{ route('product.edit', $product->id) }}"
-                                               class="btn btn-secondary botonCaja flex-fill">
-                                                <i class="bi bi-pencil"></i> Editar
+                                               class="btn btn-secondary botonCaja flex-fill btnEdit">
+                                                <i class="bi bi-pencil"></i>
                                             </a>
                                             <a href="{{ route('product.editImage', $product->id) }}"
-                                               class="btn btn-info botonCaja flex-fill">
-                                                <i class="bi bi-image"></i> Imagen
+                                               class="btn btn-secondary botonCaja flex-fill">
+                                                <i class="bi bi-image"></i>
                                             </a>
                                             <form action="{{ route('product.destroy', $product->id) }}" method="POST"
                                                   class="me-1 flex-fill">
@@ -65,25 +66,34 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger botonCaja w-100"
                                                         onclick="return confirm('¿Desea borrar este producto?')">
-                                                    <i class="bi bi-trash"></i> Borrar
+                                                    <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
                                         </div>
                                     @endif
-                                    <div class="w-100 d-flex gap-2">
-                                        <a href="{{ route('product.show', $product->id) }}"
-                                           class="btn btn-primary botonCaja w-100">
-                                            <i class="bi bi-eye"></i> Detalles
-                                        </a>
-                                    </div>
+
                                     @if($user)
-                                        <form method="POST" class="w-100" action="{{route('cart.add')}}">
-                                            @csrf
-                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <button type="submit" class="btn btn-success botonCaja w-100" {{$product->stock === '0' ? 'disabled' : ''}}>
-                                                <i class="bi bi-cart"></i> Añadir al carrito
-                                            </button>
-                                        </form>
+                                        <div class="d-flex w-100 gap-1">
+                                            <a href="{{ route('product.show', $product->id) }}"
+                                               class="btn btn-primary botonCaja flex-fill w-100">
+                                                <i class="bi bi-eye"></i> Detalles
+                                            </a>
+                                            <form method="POST" class="w-100" action="{{route('cart.add')}}">
+                                                @csrf
+                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                <button type="submit"
+                                                        class="btn btn-success botonCaja w-100" {{$product->stock === '0' ? 'disabled' : ''}}>
+                                                    <i class="bi bi-cart"></i> Añadir al carrito
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="w-100 d-flex gap-2">
+                                            <a href="{{ route('product.show', $product->id) }}"
+                                               class="btn btn-primary botonCaja flex-fill w-100">
+                                                <i class="bi bi-eye"></i> Detalles
+                                            </a>
+                                        </div>
                                     @endif
                                 </div>
                             </div>

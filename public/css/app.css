@@ -19,19 +19,12 @@ footer {
     width: 100%;
 }
 
-.botonCaja{
-    margin: 4px 2px;
-}
-
 .cajaBotones {
     display: flex;
     justify-content: center;
 }
 
-.nav-item.align-items-center {
-    display: flex;
-    align-items: center;
-}
+
 
 .divImage {
     height: 406px;
@@ -68,4 +61,10 @@ footer {
     right: -8px;
     font-size: 0.8rem;
     padding: 0 5px;
+}
+
+.btnEdit{
+    background: #64CCC5;
+    color: black;
+    border: none;
 }

@@ -49,24 +49,24 @@
                                 <h5 class="card-title text-truncate">{{ $client->name }} {{ $client->surname }}</h5>
                                 <p class="card-text text-truncate">{{ $client->email }}</p>
                                 <p class="card-text">{{ $client->phone }}</p>
-                                <div class="d-flex flex-wrap">
+                                <div class="d-flex flex-wrap gap-1">
                                     @if($user instanceof \App\Models\Employee)
-                                        <div class="cajaBotones w-100">
+                                        <div class="cajaBotones d-flex w-100 gap-1">
                                             <a href="{{ route('client.edit', $client->id) }}"
-                                               class="btn btn-secondary botonCaja">
-                                                <i class="bi bi-pencil"></i> Editar
+                                               class="btn btn-secondary botonCaja flex-fill btnEdit">
+                                                <i class="bi bi-pencil"></i>
                                             </a>
                                             <a href="{{ route('client.editImage', $client->id) }}"
-                                               class="btn btn-info botonCaja">
-                                                <i class="bi bi-image"></i> Imagen
+                                               class="btn btn-secondary botonCaja flex-fill">
+                                                <i class="bi bi-image"></i>
                                             </a>
                                             <form action="{{ route('client.destroy', $client->id) }}" method="POST"
-                                                  class="me-1">
+                                                  class="me-1 flex-fill">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger botonCaja w-100"
                                                         onclick="return confirm('¿Desea borrar este client?')">
-                                                    <i class="bi bi-trash"></i> Borrar
+                                                    <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
                                         </div>
