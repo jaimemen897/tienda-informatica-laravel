@@ -16,29 +16,45 @@
                         @endif
 
 
-                        <form method="POST" action="{{ route('password.email') }}">
+                        <form method="POST" action="{{ route('password.update') }}">
                             @csrf
                             <div class="mb-3">
-                                <label for="pwd" class="form-label">{{ __('Nueva contraseña') }}</label>
-
-                                <input type="hidden" name="token" value="{{ $token }}">
-
+                                <label for="email" class="form-label">{{ __('Email') }}</label>
                                 <input id="email" type="email" class="form-control" name="email"
-                                       value="{{ $email ?? old('email') }}"
-                                       required autocomplete="email" autofocus>
+                                       value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                                @error('email')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
 
+                            <div class="mb-3">
+                                <label for="pwd" class="form-label">{{ __('Nueva contraseña') }}</label>
                                 <input id="pwd" type="password"
                                        class="form-control @error('password') is-invalid @enderror"
                                        name="password" required autocomplete="new-password">
+                                @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
 
+                            <div class="mb-3">
+                                <label for="password_confirmation"
+                                       class="form-label">{{ __('Confirmar contraseña') }}</label>
                                 <input id="password_confirmation" type="password" class="form-control"
                                        name="password_confirmation" required autocomplete="new-password">
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                </span>
+                                @error('password_confirmation')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                                 @enderror
+                            </div>
+
+                            <div>
+                                <input type="hidden" name="token" value="{{ $token }}">
                             </div>
 
                             <div class="d-grid gap-2">

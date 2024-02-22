@@ -3,7 +3,7 @@
 return [
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'clients',
     ],
     'guards' => [
         'web' => [
@@ -34,22 +34,16 @@ return [
     ],
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
         'clients' => [
             'provider' => 'clients',
-            'table' => 'client_password_reset_tokens',
+            'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],
 
         'employees' => [
             'provider' => 'employees',
-            'table' => 'employee_password_reset_tokens',
+            'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
         ],

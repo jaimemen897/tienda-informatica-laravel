@@ -41,11 +41,13 @@
                                 @enderror
                             </div>
 
-                            <div class="d-flex justify-content-center gap-5">
+                            <div class="d-flex justify-content-center mt-3 gap-4">
                                 <button type="submit" class="btn btn-primary w-50">{{ __('Iniciar sesión') }}</button>
                                 <a href="{{ route('login.client') }}" class="btn btn-secondary w-50">Iniciar sesión como cliente</a>
-                                <a href="{{ route('email.restore') }}">{{ __('Reestablecer contraseña') }}</a>
                             </div>
+                            {{--<div class="d-flex justify-content-center mt-3 gap-4">
+                                <a href="{{ route('email.restore') }}">{{ __('Reestablecer contraseña') }}</a>
+                            </div>--}}
                         </form>
                     </div>
                 </div>

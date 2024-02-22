@@ -39,7 +39,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
-        $emailController = new EmailController($data['email']);
+        $emailController = new EmailController($data['email'],);
         $emailController->sendWelcomeEmail();
         return $client;
     }

@@ -1,30 +1,25 @@
 <?php
 
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\EmployeeController;
-
-use App\Http\Controllers\SupplierController;
-
-use App\Http\Controllers\ProductController;
-
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmailController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use App\Models\Client;
-use App\Models\Employee;
 use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 
 Route::get('/email', [EmailController::class, 'sendWelcomeEmail']);
-/*Route::get('/emailRestore', [EmailController::class, 'sendRestoreEmail'])->name('email.restore');*/
+Route::get('/emailRestore', [EmailController::class, 'sendRestoreEmail'])->name('email.restore');
 
 
 Route::get('/', function () {
@@ -78,7 +73,7 @@ Route::post('/reset-password', function (Request $request) {
 
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
-        function (User $user, string $password) {
+        function (Client $user, string $password) {
             $user->forceFill([
                 'password' => Hash::make($password)
             ])->setRememberToken(Str::random(60));
@@ -90,12 +85,9 @@ Route::post('/reset-password', function (Request $request) {
     );
 
     return $status === Password::PASSWORD_RESET
-        ? redirect()->route('login')->with('status', __($status))
+        ? redirect()->route('login.client')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->name('password.update');
-
-
-
 
 
 Route::group(['prefix' => 'client'], function () {
@@ -160,7 +152,6 @@ Route::group(['prefix' => 'categories'], function () {
     Route::put('/update/{id}', [CategoryController::class, 'update'])->name('category.update')->middleware(['auth:employee', 'admin']);
     Route::delete('/destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy')->middleware(['auth:employee', 'admin']);
 });
-
 
 
 Route::group(['prefix' => 'supplier'], function () {
