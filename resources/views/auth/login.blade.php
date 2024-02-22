@@ -6,6 +6,11 @@
         <div class="row justify-content-center">
 
             <div class="col-md-8">
+                @if(session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 @if(session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}
@@ -49,7 +54,6 @@
 
                             <div class="d-flex justify-content-center mt-3 gap-4">
                                 <a href="{{ route('register') }}">¿No tienes una cuenta? Regístrate</a>
-                                {{--link to restore--}}
                                 <a href="{{ route('password.request') }}">¿Olvidaste tu contraseña?</a>
                             </div>
                         </form>
