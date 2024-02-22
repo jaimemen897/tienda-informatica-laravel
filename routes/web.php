@@ -17,11 +17,6 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
-
-Route::get('/email', [EmailController::class, 'sendWelcomeEmail']);
-Route::get('/emailRestore', [EmailController::class, 'sendRestoreEmail'])->name('email.restore');
-
-
 Route::get('/', function () {
     return redirect()->route('product.index');
 });
@@ -29,21 +24,7 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
-Route::get('/login/employee', [App\Http\Controllers\Auth\EmployeeLoginController::class, 'showLoginForm'])->name('login.employee');
-Route::post('/login/employee', [App\Http\Controllers\Auth\EmployeeLoginController::class, 'login'])->name('login.employee.submit');
-Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showClientLoginForm'])->name('login.client');
-Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.client.submit');
 
-/*Route::get('password/email', [ResetPasswordController::class, 'showLinkRequestForm'])->name('password.email');
-Route::post('password/email', [ResetPasswordController::class, 'sendResetLinkEmail'])->name('password.email.submit');
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
-Route::get('/password/verify', [ResetPasswordController::class, 'showResetForm'])->name('password.verify');
-
-Route::get('/token/verify', [App\Http\Controllers\TokenController::class, 'showTokenForm'])->name('token.verify');
-Route::post('/token/verify', [App\Http\Controllers\TokenController::class, 'verifyToken'])->name('token.verify.submit');
-Route::get('/password/change', [App\Http\Controllers\ChangePasswordController::class, 'showChangePasswordForm'])->name('password.reset');
-Route::post('/password/change', [App\Http\Controllers\ChangePasswordController::class, 'changePassword'])->name('password.reset.submit');*/
 Route::get('/forgot-password', function () {
     return view('auth.passwords.restore');
 })->name('password.request');
@@ -89,6 +70,15 @@ Route::post('/reset-password', function (Request $request) {
         : back()->withErrors(['email' => [__($status)]]);
 })->name('password.update');
 
+Route::get('/email', [EmailController::class, 'sendWelcomeEmail']);
+Route::get('/emailRestore', [EmailController::class, 'sendRestoreEmail'])->name('email.restore');
+
+Route::group(['prefix' => 'login'], function () {
+    Route::get('/employee', [App\Http\Controllers\Auth\EmployeeLoginController::class, 'showLoginForm'])->name('login.employee');
+    Route::post('/employee', [App\Http\Controllers\Auth\EmployeeLoginController::class, 'login'])->name('login.employee.submit');
+    Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showClientLoginForm'])->name('login.client');
+    Route::post('/', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.client.submit');
+});
 
 Route::group(['prefix' => 'client'], function () {
     Route::get('/', [ClientController::class, 'index'])->name('client.index')->middleware(['auth:employee', 'admin']);
@@ -153,7 +143,6 @@ Route::group(['prefix' => 'categories'], function () {
     Route::delete('/destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy')->middleware(['auth:employee', 'admin']);
 });
 
-
 Route::group(['prefix' => 'supplier'], function () {
 
     Route::get('/', [SupplierController::class, 'index'])->name('supplier.index')->middleware(['auth:employee', 'admin']);
@@ -177,7 +166,6 @@ Route::group(['prefix' => 'cart'], function () {
     Route::post('/increase', [CartController::class, 'increaseQuantity'])->name('cart.increase')->middleware(['auth:web,employee']);
     Route::post('/decrease', [CartController::class, 'decreaseQuantity'])->name('cart.decrease')->middleware(['auth:web,employee']);
     Route::delete('/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware(['auth:web,employee']);
-
 });
 
 Route::get('/factura', [App\Http\Controllers\ReportController::class, 'generatePDF'])->name('factura')->middleware('auth:employee,web');
