@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" type="text/css">
     <link href="{{ asset('images/favicon.png') }}" rel="icon" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"/>
+
 </head>
 <body>
 
