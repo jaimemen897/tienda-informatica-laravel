@@ -20,6 +20,9 @@
                             case 'product.index':
                                 $section = 'Productos';
                                 break;
+                            case 'category.index':
+                                $section = 'Categorías';
+                                break;
                             case 'client.index':
                                 $section = 'Clientes';
                                 break;
@@ -40,6 +43,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('product.index') }}">Productos</a></li>
+                            <li><a class="dropdown-item" href="{{ route('category.index') }}">Categorías</a></li>
                             <li><a class="dropdown-item" href="{{ route('client.index') }}">Clientes</a></li>
                             <li><a class="dropdown-item" href="{{ route('employee.index') }}">Empleados</a></li>
                             <li><a class="dropdown-item" href="{{ route('supplier.index') }}">Proveedores</a></li>
@@ -70,7 +74,7 @@
                 @if($user)
                     <a href="{{route('cart.index')}}" class="position-relative">
                         <i class="bi bi-cart-fill" style="color: #FFFFFF8C; font-size: 1.5rem"></i>
-                        <div class="bg-light rounded-circle cart-count">{{count(session('cart') ?? [])}}</div>
+                        <div class="bg-body text-dark rounded-circle cart-count"> {{ count(session('cart') ?? []) }}</div>
                     </a>
                 @endif
             </div>

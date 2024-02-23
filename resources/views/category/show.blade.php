@@ -13,7 +13,7 @@
                 <dt class="col-sm-2">Nombre:</dt>
                 <dd class="col-sm-10">{{ $category->name }}</dd>
 
-                <div class="mt-3">
+                <div class="mt-3 mb-5">
                     <a class="btn btn-primary" href="{{ route('category.index') }}">Volver</a>
                 </div>
             </div>
