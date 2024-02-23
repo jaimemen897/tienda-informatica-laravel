@@ -51,7 +51,7 @@
                                 <p class="card-text">{{ $employee->phone }}</p>
                                 <div class="d-flex flex-wrap gap-1">
                                     @if($user instanceof \App\Models\Employee)
-                                        <div class="cajaBotones d-flex w-100 gap-1">
+                                        <div class="cajaBotones d-flex justify-content-center w-100 gap-1">
                                             <a href="{{ route('employee.edit', $employee->id) }}"
                                                class="btn btn-secondary flex-fill botonCaja btnEdit">
                                                 <i class="bi bi-pencil"></i>
