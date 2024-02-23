@@ -1,6 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '205258ef25a04a2d3013c6aad22f01b41a6ed56f',
         'pretty_version' => '1.0.0+no-version-set',
         'version' => '1.0.0.0',
         'reference' => null,
@@ -18,6 +21,15 @@
             'install_path' => __DIR__ . '/../barryvdh/laravel-dompdf',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'brianium/paratest' => array(
+            'pretty_version' => 'v7.4.3',
+            'version' => '7.4.3.0',
+            'reference' => '64fcfd0e28a6b8078a19dbf9127be2ee645b92ec',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../brianium/paratest',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'brick/math' => array(
             'pretty_version' => '0.11.0',
@@ -109,6 +121,15 @@
             'reference' => 'bfb4fe148adbf78eff521199619b93a52ae3554b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../fakerphp/faker',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
+        'fidry/cpu-core-counter' => array(
+            'pretty_version' => '1.1.0',
+            'version' => '1.1.0.0',
+            'reference' => 'f92996c4d5c1a696a6a970e20f7c4216200fcc42',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../fidry/cpu-core-counter',
             'aliases' => array(),
             'dev_requirement' => true,
         ),
@@ -397,6 +418,15 @@
                 0 => '4.1.2',
             ),
         ),
+        'jean85/pretty-package-versions' => array(
+            'pretty_version' => '2.0.5',
+            'version' => '2.0.5.0',
+            'reference' => 'ae547e455a3d8babd07b96966b17d7fd21d9c6af',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jean85/pretty-package-versions',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -422,9 +452,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '205258ef25a04a2d3013c6aad22f01b41a6ed56f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
