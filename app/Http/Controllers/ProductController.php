@@ -22,8 +22,10 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $suppliers = Supplier::all();
         return view('products.create')
-            ->with('categories', $categories);
+            ->with('categories', $categories)
+            ->with('suppliers', $suppliers);
     }
 
     public function store(Request $request)
@@ -130,7 +132,7 @@ class ProductController extends Controller
 
         $product->update($data);
         flash('Producto actualizado correctamente')->success();
-        return $product;
+        return redirect()->route('product.index');
     }
 
     public function destroy($id)
