@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EmployeeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Models\Client;
+use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -55,19 +57,23 @@ Route::post('/reset-password', function (Request $request) {
 
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
-        function (Client $user, string $password) {
-            $user->forceFill([
-                'password' => Hash::make($password)
-            ])->setRememberToken(Str::random(60));
+        function ($user, string $password) {
+            if ($user instanceof Client || $user instanceof Employee) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
 
-            $user->save();
+                $user->save();
 
-            event(new PasswordReset($user));
+                event(new PasswordReset($user));
+            }
         }
     );
 
+    $redirectRoute = $request->user() instanceof Client ? 'login.client' : 'login.employee';
+
     return $status === Password::PASSWORD_RESET
-        ? redirect()->route('login.client')->with('status', __($status))
+        ? redirect()->route($redirectRoute)->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->name('password.update');
 
@@ -166,6 +172,11 @@ Route::group(['prefix' => 'cart'], function () {
     Route::post('/increase', [CartController::class, 'increaseQuantity'])->name('cart.increase')->middleware(['auth:web,employee']);
     Route::post('/decrease', [CartController::class, 'decreaseQuantity'])->name('cart.decrease')->middleware(['auth:web,employee']);
     Route::delete('/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware(['auth:web,employee']);
+});
+
+Route::group(['prefix' => 'checkout'], function () {
+    Route::get('/', [CheckoutController::class, 'index'])->name('checkout.index')->middleware(['auth:web,employee']);
+    Route::post('/complete', [CheckoutController::class, 'complete'])->name('checkout.complete')->middleware(['auth:web,employee']);
 });
 
 Route::group(['prefix' => 'orders'], function () {

@@ -2,13 +2,12 @@
 
 @section('title', 'Checkout')
 
-
 @section('content')
     <div class="container mt-4 mb-5">
-        <h1 class="mb-4">Carrito</h1>
+        <h1 class="mb-4">Formulario de compra</h1>
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card mb-5">
                     <div class="card-body">
                         <form action="{{ route('checkout.complete') }}" method="post">
                             @csrf
@@ -37,8 +36,6 @@
                                 <label for="country">Pais</label>
                                 <input type="text" id="country" name="country" class="form-control">
                             </div>
-
-
 
                             <h2 class="mt-2">Detalles de la tarjeta de crédito</h2>
                             <div class="form-group">
