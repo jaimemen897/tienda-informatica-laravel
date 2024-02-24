@@ -35,13 +35,12 @@
                         @foreach($orders as $order)
                             <div class="card mb-3">
                                 <div class="card-body">
-                                    <p class="card-text"><strong>Dirección de
-                                            envío: </strong>{{$order->client->address->street}}
-                                        , {{$order->client->address->number}}, {{$order->client->address->city}}
-                                        , {{$order->client->address->zipCode}}, {{$order->client->address->state}}
-                                        , {{$order->client->address->country}}</p>
+                                    <p class="card-text"><strong>Dirección de envío: </strong>
+                                        {{$order->client->address->street}}, {{$order->client->address->number}}
+                                        , {{$order->client->address->city}}, {{$order->client->address->zipCode}}
+                                        , {{$order->client->address->state}}, {{$order->client->address->country}}</p>
                                     <p class="card-text"><small class="text-muted">Realizado
-                                            el {{$order->created_at}}</small></p>
+                                            el {{ $order->created_at->format('d-m-Y') }}</small></p>
 
                                     <div class="accordion" id="accordionExample{{$loop->iteration}}">
                                         @php $lineIteration = 0; @endphp
@@ -79,14 +78,14 @@
                                                                     <p>
                                                                         Subtotal: {{$lineOrder->productPrice * $lineOrder->quantity}}
                                                                         €</p>
-                                                                    <a href="{{ route('factura.id', $order->id) }}"
-                                                                       class="btn btn-primary">Descargar factura</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             @endforeach
+                                            <a href="{{ route('factura.id', $order->id) }}"
+                                               class="btn btn-primary mt-3">Descargar factura</a>
                                         @endif
                                     </div>
                                 </div>
