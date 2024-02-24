@@ -3,16 +3,23 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Order;
+use App\Models\Product;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportController extends Controller
 {
-    public function generatePDF()
+    public function getInvoice($id)
     {
-        $data = ['title' => 'Welcome to HDTuto.com'];
+        $order = Order::find($id);
+        $order->lineOrders = json_decode($order->lineOrders);
+        foreach ($order->lineOrders as $lineOrder) {
+            $lineOrder->product = Product::find($lineOrder->productId);
+        }
+        $client = json_decode($order->client);
+        $order->client = $client;
 
-        $pdf = PDF::loadView('factura', $data);
-
-        return $pdf->download('hdtuto.pdf');
+        $pdf = PDF::loadView('factura', ['order' => $order]);
+        return $pdf->download('invoice.pdf');
     }
 }
