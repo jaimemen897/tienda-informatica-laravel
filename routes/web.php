@@ -57,23 +57,19 @@ Route::post('/reset-password', function (Request $request) {
 
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
-        function ($user, string $password) {
-            if ($user instanceof Client || $user instanceof Employee) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->setRememberToken(Str::random(60));
+        function (Client $user, string $password) {
+            $user->forceFill([
+                'password' => Hash::make($password)
+            ])->setRememberToken(Str::random(60));
 
-                $user->save();
+            $user->save();
 
-                event(new PasswordReset($user));
-            }
+            event(new PasswordReset($user));
         }
     );
 
-    $redirectRoute = $request->user() instanceof Client ? 'login.client' : 'login.employee';
-
     return $status === Password::PASSWORD_RESET
-        ? redirect()->route($redirectRoute)->with('status', __($status))
+        ? redirect()->route('login.client')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->name('password.update');
 
@@ -185,4 +181,4 @@ Route::group(['prefix' => 'orders'], function () {
     Route::delete('/destroy/{id}', [OrderController::class, 'destroy'])->name('orders.destroy')->middleware(['auth:employee', 'admin']);
 });
 
-Route::get('/factura', [App\Http\Controllers\ReportController::class, 'generatePDF'])->name('factura')->middleware('auth:employee,web');
+Route::get('/factura/{id}', [App\Http\Controllers\ReportController::class, 'getInvoice'])->name('factura.id')->middleware('auth:employee,web');
