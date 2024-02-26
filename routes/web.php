@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SupplierController;
 use App\Models\Client;
+use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
@@ -171,5 +174,15 @@ Route::group(['prefix' => 'cart'], function () {
     Route::delete('/remove', [CartController::class, 'removeFromCart'])->name('cart.remove')->middleware(['auth:web,employee']);
 });
 
-Route::get('/factura', [App\Http\Controllers\ReportController::class, 'generatePDF'])->name('factura')->middleware('auth:employee,web');
+Route::group(['prefix' => 'checkout'], function () {
+    Route::get('/', [CheckoutController::class, 'index'])->name('checkout.index')->middleware(['auth:web,employee']);
+    Route::post('/complete', [CheckoutController::class, 'complete'])->name('checkout.complete')->middleware(['auth:web,employee']);
+});
 
+Route::group(['prefix' => 'orders'], function () {
+    Route::get('/', [OrderController::class, 'index'])->name('orders.index')->middleware(['auth:employee', 'admin']);
+    Route::get('/{id}', [OrderController::class, 'show'])->name('orders.show')->middleware(['auth:employee', 'admin']);
+    Route::delete('/destroy/{id}', [OrderController::class, 'destroy'])->name('orders.destroy')->middleware(['auth:employee', 'admin']);
+});
+
+Route::get('/factura/{id}', [App\Http\Controllers\ReportController::class, 'getInvoice'])->name('factura.id')->middleware('auth:employee,web');

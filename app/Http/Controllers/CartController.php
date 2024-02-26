@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CartItem;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -188,4 +189,18 @@ class CartController extends Controller
 
         return redirect()->back();
     }
+
+    public function checkout()
+    {
+        $cart = session('cart', []);
+
+        if (count($cart) <= 0) {
+            flash('No hay productos en el carrito')->error();
+            return redirect()->back();
+        }
+
+        return view('checkout.index')
+            ->with('cart', $cart);
+    }
+
 }

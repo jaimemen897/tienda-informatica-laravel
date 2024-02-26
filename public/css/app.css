@@ -19,13 +19,6 @@ footer {
     width: 100%;
 }
 
-.cajaBotones {
-    display: flex;
-    justify-content: center;
-}
-
-
-
 .divImage {
     height: 406px;
     width: 406px;
@@ -35,8 +28,6 @@ footer {
 
     & img {
         padding: 10px;
-        max-width: 100%;
-        max-height: 100%;
         object-fit: contain;
     }
 }

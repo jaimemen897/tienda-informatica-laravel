@@ -65,6 +65,9 @@
                             <div class="d-flex justify-content-end">
                                 <h3>Total: {{ $total }}€</h3>
                             </div>
+                            <div class="d-flex justify-content-end">
+                                <a href="{{ route('checkout.index') }}" type="submit" class="btn btn-primary">Tramitar pedido</a>
+                            </div>
                         @else
                             <h3>No hay productos en el carrito</h3>
                         @endif
