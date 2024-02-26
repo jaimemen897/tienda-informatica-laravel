@@ -38,7 +38,6 @@
                     @csrf
                     @method('PATCH')
                     <div class="form-group mb-3">
-                        <label for="image"><strong>Imagen:</strong></label> <br>
                         <input accept="image/*" class="form-control-file" id="image" name="image" required type="file">
                         <small class="text-danger"></small>
                     </div>
@@ -50,14 +49,9 @@
             <div class="col-sm-6">
                 <dt class="col-sm-2">Imagen:</dt>
                 <dd class="col-sm-10">
-                    @if($client->image != Client::$IMAGE_DEFAULT)
-                        <img alt="Imagen del client" class="img-fluid"
-                             src="{{ asset('storage/clients/' . $client->image) }}"
-                             width="300" height="300">
-                    @else
-                        <img alt="Imagen por defecto" class="img-fluid" src="{{ Client::$IMAGE_DEFAULT }}" width="300"
-                             height="300">
-                    @endif
+                    <img alt="Imagen del client" class="img-fluid"
+                         src="{{ $client->getImageUrl() }}"
+                         width="300" height="300">
                 </dd>
             </div>
         </dl>

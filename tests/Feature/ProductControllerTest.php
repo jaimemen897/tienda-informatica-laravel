@@ -47,7 +47,6 @@ class ProductControllerTest extends TestCase
         });
     }
 
-
     public function test_create_should_return_form()
     {
         $user = Employee::first();
@@ -73,7 +72,6 @@ class ProductControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(route('login.client'));
     }
-
 
     public function test_create_product_should_insert_in_database()
     {
