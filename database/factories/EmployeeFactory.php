@@ -22,7 +22,7 @@ class EmployeeFactory extends Factory
             'salary' => $this->faker->randomNumber(5),
             'position' => $this->faker->randomElement(Employee::POSITIONS),
             'email' => $this->faker->email(),
-            'image' => Employee::$IMAGE_DEFAULT,
+            'image' => Employee::IMAGE_DEFAULT,
             'password' => bcrypt('password')
         ];
     }

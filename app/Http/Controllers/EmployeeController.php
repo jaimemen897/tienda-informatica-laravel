@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -59,7 +60,7 @@ class EmployeeController extends Controller
         $employee->salary = $request->salary;
         $employee->position = $request->position;
         $employee->email = $request->email;
-        $employee->image = $employee::$IMAGE_DEFAULT;
+        $employee->image = $employee::IMAGE_DEFAULT;
         $employee->password = bcrypt($request->password);
         $employee->save();
         flash('Empleado creado correctamente')->success();
@@ -123,30 +124,27 @@ class EmployeeController extends Controller
     public function updateImage(Request $request, $id)
     {
         $employee = Employee::find($id);
-        if ($employee) {
-            $validator = Validator::make($request->all(), [
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ], $this->messages());
 
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
-
-            $imagePath = 'public/employees/' . $employee->image;
-            if ($employee->image != $employee::$IMAGE_DEFAULT && Storage::exists($imagePath)) {
-                Storage::delete($imagePath);
-            }
-
-            $image = $request->file('image');
-            $fileName = $image->getClientOriginalName();
-            $fileToSave = time() . $fileName;
-            $image->storeAs('public/employees', $fileToSave);
-            $employee->image = $fileToSave;
-            $employee->save();
-            flash('Imagen actualizada correctamente')->success();
-        } else {
-            flash('Empleado no encontrado')->error();
+        if (!$employee) {
+            flash('No se ha encontrado el empleado')->error();
+            return redirect()->route('employee.index');
         }
+        $data = $request->validate([
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ], $this->messages());
+
+        $diskStorage = Storage::disk('public');
+        $image = $request->file('image');
+        $extension = $image->extension();
+        $path = $diskStorage->putFileAs('employees', $image, "$id.$extension");
+        if ($path) {
+            $employee->image = $path;
+            $employee->save();
+        } else {
+            flash('Error al subir la imagen')->error();
+            return redirect()->route('employee.index');
+        }
+        flash('Imagen actualizada correctamente')->success();
         return redirect()->route('employee.index');
     }
 
@@ -155,7 +153,7 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         if ($employee) {
             $imagePath = 'public/employees/' . $employee->image;
-            if ($employee->image != $employee::$IMAGE_DEFAULT && Storage::exists($imagePath)) {
+            if ($employee->image != $employee::IMAGE_DEFAULT && Storage::exists($imagePath)) {
                 Storage::delete($imagePath);
             }
             $employee->delete();

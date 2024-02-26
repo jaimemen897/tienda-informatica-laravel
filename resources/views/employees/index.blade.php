@@ -32,19 +32,11 @@
                 @foreach ($employees as $employee)
                     <div class="col-md-3 mb-4">
                         <div class="card">
-                            @if($employee->image != Employee::$IMAGE_DEFAULT)
                                 <div class="divImagePerson">
-
                                     <a href="{{ route('employee.show', $employee->id) }}">
                                         <img alt="Imagen del empleado" src="{{ $employee->getImageUrl() }}">
                                     </a>
                                 </div>
-                            @else
-                                <div class="divImagePerson">
-                                    <a href="{{ route('employee.show', $employee->id) }}">
-                                        <img alt="Imagen por defecto" src="{{ Employee::$IMAGE_DEFAULT }}"> </a>
-                                </div>
-                            @endif
                             <div class="card-body">
                                 <h5 class="card-title text-truncate">{{ $employee->name }} {{ $employee->surname }}</h5>
                                 <p class="card-text text-truncate">{{ $employee->email }}</p>

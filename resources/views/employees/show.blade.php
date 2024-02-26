@@ -36,11 +36,7 @@
             </div>
             <div class="col-sm-6">
                 <dd class="col-sm-10">
-                    @if($employee->image != Employee::$IMAGE_DEFAULT)
-                        <img alt="Imagen del empleado" class="img-fluid" src="{{ asset('storage/employees/' . $employee->image) }}" width="280" height="280">
-                    @else
-                        <img alt="Imagen por defecto" class="img-fluid" src="{{ Employee::$IMAGE_DEFAULT }}" width="280" height="280">
-                    @endif
+                        <img alt="Imagen del empleado" class="img-fluid" src="{{ $employee->getImageUrl() }}" width="280" height="280">
                 </dd>
             </div>
         </dl>

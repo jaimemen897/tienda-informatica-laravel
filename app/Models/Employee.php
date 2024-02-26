@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -17,7 +18,7 @@ class Employee extends Model implements AuthenticatableContract
     use HasFactory;
     use HasUUids;
 
-    public static $IMAGE_DEFAULT = 'https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg';
+    const IMAGE_DEFAULT = 'https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg';
     public const POSITIONS = ['Manager', 'Developer', 'Designer', 'Tester', 'Sales'];
 
     protected $fillable = [
@@ -64,5 +65,19 @@ class Employee extends Model implements AuthenticatableContract
         static::creating(function ($employee) {
             $employee->id = Str::uuid();
         });
+    }
+
+    public function getImageUrl()
+    {
+
+        if ($this->image === self::IMAGE_DEFAULT) {
+            return $this->image;
+        }
+
+        $diskStorage = Storage::disk('public');
+        if ($diskStorage->exists($this->image)) {
+            return $diskStorage->url($this->image);
+        }
+        return self::IMAGE_DEFAULT;
     }
 }
