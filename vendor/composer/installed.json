@@ -9577,7 +9577,6 @@
         "fidry/cpu-core-counter",
         "filp/whoops",
         "hamcrest/hamcrest-php",
-        "jean85/pretty-package-versions",
         "laravel/pint",
         "laravel/sail",
         "mockery/mockery",
