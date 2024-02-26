@@ -32,19 +32,11 @@
                 @foreach ($clients as $client)
                     <div class="col-md-3 mb-4">
                         <div class="card">
-                            @if($client->image != Client::$IMAGE_DEFAULT)
-                                <div class="divImagePerson">
-                                    <a href="{{ route('client.show', $client->id) }}">
-                                        <img alt="Imagen del cliente" src="{{ $client->getImageUrl() }}">
-                                    </a>
-                                </div>
-                            @else
-                                <div class="divImagePerson">
-                                    <a href="{{ route('client.show', $client->id) }}">
-                                        <img alt="Imagen por defecto" src="{{ Client::$IMAGE_DEFAULT }}">
-                                    </a>
-                                </div>
-                            @endif
+                            <div class="divImagePerson">
+                                <a href="{{ route('client.show', $client->id) }}">
+                                    <img alt="Imagen del cliente" src="{{ $client->getImageUrl() }}">
+                                </a>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title text-truncate">{{ $client->name }} {{ $client->surname }}</h5>
                                 <p class="card-text text-truncate">{{ $client->email }}</p>

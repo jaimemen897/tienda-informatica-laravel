@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 
@@ -19,7 +20,7 @@ class Client extends Model implements AuthenticatableContract
     use HasUUids;
     use Notifiable;
 
-    public static $IMAGE_DEFAULT = 'https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg';
+    public CONST IMAGE_DEFAULT = 'https://icon-library.com/images/anonymous-icon/anonymous-icon-0.jpg';
     protected $fillable = [
         'id',
         'name',
@@ -63,5 +64,19 @@ class Client extends Model implements AuthenticatableContract
         static::creating(function ($client) {
             $client->id = Str::uuid();
         });
+    }
+
+    public function getImageUrl()
+    {
+
+        if ($this->image === self::IMAGE_DEFAULT) {
+            return $this->image;
+        }
+
+        $diskStorage = Storage::disk('public');
+        if ($diskStorage->exists($this->image)) {
+            return $diskStorage->url($this->image);
+        }
+        return self::IMAGE_DEFAULT;
     }
 }
