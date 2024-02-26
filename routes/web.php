@@ -162,8 +162,8 @@ Route::group(['prefix' => 'supplier'], function () {
 
 Route::group(['prefix' => 'profile'], function () {
 Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth:web,employee');
-Route::get('/me/edit/{id}', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth:web,employee');
-Route::put('/me/update/{id}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update')->middleware('auth:web,employee');
+Route::get('/edit', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth:web,employee');
+Route::put('/update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update')->middleware('auth:web,employee');
 });
 
 Route::group(['prefix' => 'cart'], function () {

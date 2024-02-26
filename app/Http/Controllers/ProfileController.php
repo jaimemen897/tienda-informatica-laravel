@@ -28,29 +28,19 @@ class ProfileController extends Controller
         return view('users.profile')->with('user', $user)->with('orders', $currentUserOrders);
     }
 
-    public function edit($id)
+    public function edit()
     {
         $user = Auth::user();
-        if ($user) {
-            return view('users.edit')->with('user', $user);
-        } else {
-            flash('Usuario no encontrado')->error();
-            return redirect()->route('users.profile');
-        }
+        return view('users.edit')->with('user', $user);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $user = User::find($id);
-        if ($user) {
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->save();
-            flash('Usuario actualizado correctamente')->success();
-            return redirect()->route('users.profile');
-        } else {
-            flash('Usuario no encontrado')->error();
-            return redirect()->route('users.profile');
-        }
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect('/profile');
     }
 }
