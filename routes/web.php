@@ -157,7 +157,11 @@ Route::group(['prefix' => 'supplier'], function () {
     Route::get('/{id}', [SupplierController::class, 'show'])->where('id', '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')->name('supplier.show')->middleware(['auth:employee', 'admin']);
 });
 
-Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth:web,employee');
+Route::group(['prefix' => 'profile'], function () {
+Route::get('/', [App\Http\Controllers\ProfileController::class, 'index'])->name('profile.index')->middleware('auth:web,employee');
+Route::get('/me/edit/{id}', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth:web,employee');
+Route::put('/me/update/{id}', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update')->middleware('auth:web,employee');
+});
 
 Route::group(['prefix' => 'cart'], function () {
     Route::post('/add', [CartController::class, 'addToCart'])->name('cart.add')->middleware(['auth:web,employee']);
