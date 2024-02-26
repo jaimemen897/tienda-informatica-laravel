@@ -56,7 +56,7 @@ class ClientController extends Controller
         $client->surname = $request->surname;
         $client->phone = $request->phone;
         $client->email = $request->email;
-        $client->image = $client::$IMAGE_DEFAULT;
+        $client->image = Client::IMAGE_DEFAULT;
         $client->password = bcrypt($request->password);
         $client->save();
         flash('Cliente creado correctamente')->success();
@@ -117,30 +117,27 @@ class ClientController extends Controller
     public function updateImage(Request $request, $id)
     {
         $client = Client::find($id);
-        if ($client){
-            $validator = Validator::make($request->all(), [
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
 
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
-
-            $imagePath = 'public/clients/' . $client->image;
-            if ($client->image != $client::$IMAGE_DEFAULT && Storage::exists($imagePath)) {
-                Storage::delete($imagePath);
-            }
-
-            $image = $request->file('image');
-            $fileName = $image->getClientOriginalName();
-            $fileToSave = time() . $fileName;
-            $image->storeAs('public/clients', $fileToSave);
-            $client->image = $fileToSave;
-            $client->save();
-            flash('Imagen actualizada correctamente')->success();
-        } else {
-            flash('Cliente no encontrado')->error();
+        if (!$client) {
+            flash('No se ha encontrado el cliento')->error();
+            return redirect()->route('client.index');
         }
+        $request->validate([
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+        ], $this->messages());
+
+        $diskStorage = Storage::disk('public');
+        $image = $request->file('image');
+        $extension = $image->extension();
+        $path = $diskStorage->putFileAs('clients', $image, "$id.$extension");
+        if ($path) {
+            $client->image = $path;
+            $client->save();
+        } else {
+            flash('Error al subir la imagen')->error();
+            return redirect()->route('client.index');
+        }
+        flash('Imagen actualizada correctamente')->success();
         return redirect()->route('client.index');
     }
 
@@ -149,7 +146,7 @@ class ClientController extends Controller
         $client = Client::find($id);
         if ($client) {
             $imagePath = 'public/clients/' . $client->image;
-            if ($client->image != $client::$IMAGE_DEFAULT && Storage::exists($imagePath)) {
+            if ($client->image != $client::IMAGE_DEFAULT && Storage::exists($imagePath)) {
                 Storage::delete($imagePath);
             }
             $client->delete();

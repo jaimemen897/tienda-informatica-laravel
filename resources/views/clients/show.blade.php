@@ -31,11 +31,8 @@
             <div class="col-sm-6">
 
                 <dd class="col-sm-10">
-                    @if($client->image != Client::$IMAGE_DEFAULT)
-                        <img alt="Imagen del client" class="img-fluid" src="{{ asset('storage/clients/' . $client->image) }}" width="280" height="280">
-                    @else
-                        <img alt="Imagen por defecto" class="img-fluid" src="{{ Client::$IMAGE_DEFAULT }}" width="280" height="280">
-                    @endif
+                    <img alt="Imagen del client" class="img-fluid" src="{{ $client->getImageUrl() }}" width="280"
+                         height="280">
                 </dd>
             </div>
         </dl>
