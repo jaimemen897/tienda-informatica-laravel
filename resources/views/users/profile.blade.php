@@ -26,6 +26,7 @@
 
                 <div class="mt-3">
                     <a class="btn btn-primary mb-5" href="{{ route('product.index') }}">Volver</a>
+                    <a class="btn btn-primary mb-5" href="{{ route('profile.edit', $user->id) }}">Editar</a>
                 </div>
             </div>
             <div class="col-sm-6 mb-5">

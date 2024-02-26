@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product;
 use Auth;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -24,5 +25,21 @@ class ProfileController extends Controller
         }
 
         return view('users.profile')->with('user', $user)->with('orders', $currentUserOrders);
+    }
+
+    public function edit()
+    {
+        $user = Auth::user();
+        return view('users.edit')->with('user', $user);
+    }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect('/profile');
     }
 }
