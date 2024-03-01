@@ -79,5 +79,11 @@ class OrderControllerTest extends TestCase
         $response->assertStatus(400);
     }
 
+    public function test_show_should_return_error()
+    {
+        $response = $this->get(route('orders.show', '60b3e3e3e4b0e3e3e4b0e3e4'));
+        $response->assertRedirect(route('orders.index'));
+    }
+
 
 }
