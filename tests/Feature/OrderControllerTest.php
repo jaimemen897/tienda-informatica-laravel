@@ -78,6 +78,6 @@ class OrderControllerTest extends TestCase
         $response = $this->delete(route('orders.destroy', '60b3e3e3e4b0e3e3e4b0e3e4'));
         $response->assertStatus(400);
     }
-    
+
 
 }
