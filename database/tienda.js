@@ -1,14 +1,26 @@
 
+db = connect("mongodb://localhost:27017/tienda-laravel");
+
 db.createUser({
     user: 'root',
-    pwd: 'uwu',
+    pwd: 'uwuu',
     roles: [
         {
             role: 'readWrite',
             db: 'tienda-laravel',
         },
     ],
-})
+});
 
-db = db.getSiblingDB('tienda-laravel')
+db = connect("mongodb://localhost:27017/tienda-testing");
 
+db.createUser({
+    user: 'test',
+    pwd: 'uwuu',
+    roles: [
+        {
+            role: 'readWrite',
+            db: 'tienda-testing',
+        },
+    ],
+});

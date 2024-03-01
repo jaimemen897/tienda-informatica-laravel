@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        if (!Schema::connection('mongodb')->hasTable('orders')) {
-            Schema::connection('mongodb')->create('orders', function (Blueprint $table) {
-                $table->id();
-                $table->integer('userId');
-                $table->json('client');
-                $table->json('lineOrders');
-                $table->integer('totalItems');
-                $table->float('total');
-                $table->timestamps();
-            });
-        }
+//        if (!Schema::connection('mongodb')->hasTable('orders')) {
+//            Schema::connection('mongodb')->create('orders', function (Blueprint $table) {
+//                $table->id();
+//                $table->integer('userId');
+//                $table->json('client');
+//                $table->json('lineOrders');
+//                $table->integer('totalItems');
+//                $table->float('total');
+//                $table->timestamps();
+//            });
+//        }
     }
 
     public function down(): void

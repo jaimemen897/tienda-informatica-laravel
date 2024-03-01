@@ -27,6 +27,9 @@
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
+        <env name="MONGO_DB_DATABASE" value="tienda-testing"/>
+        <env name="MONGO_DB_USERNAME" value="test"/>
+        <env name="MONGO_DB_PASSWORD" value="uwuu"/>
         <ini name="xdebug.mode" value="off"/>
     </php>
 </phpunit>

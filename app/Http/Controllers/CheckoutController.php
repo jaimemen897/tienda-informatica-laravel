@@ -13,6 +13,11 @@ class CheckoutController extends Controller
     {
         $cart = session('cart', []);
 
+        if (empty($cart)) {
+            flash('No hay productos en el carrito')->error();
+            return redirect()->route('product.index');
+        }
+
         return view('checkout.index', compact('cart'));
     }
 
@@ -20,11 +25,6 @@ class CheckoutController extends Controller
     {
 
         $cart = session('cart', []);
-
-        if (count($cart) <= 0) {
-            flash('No hay productos en el carrito')->error();
-            return redirect()->back();
-        }
 
         $total = array_reduce($cart, function ($carry, $item) {
             return $carry + $item->product->price * $item->quantity;
