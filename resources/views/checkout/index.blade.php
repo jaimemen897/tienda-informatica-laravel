@@ -3,6 +3,13 @@
 @section('title', 'Checkout')
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-danger alert-dismissible">
+            @foreach ($errors->all() as $error)
+                {{ $error }} <br>
+            @endforeach
+        </div>
+    @endif
     <div class="container mt-4 mb-5">
         <h1 class="mb-4">Formulario de compra</h1>
         <div class="row">

@@ -60,20 +60,6 @@ class OrderController extends Controller
 
     public function update(Request $request, order $order)
     {
-//        Validar cosas
-//        $data = $request->validate([
-//            'idUsuario' => ['required', 'integer'],
-//            'cliente' => ['required'],
-//        ]);
-
-
-//        $address = new stdClass();
-//        $address->street = $request->street;
-//        $address->number = $request->number;
-//        $address->city = $request->city;
-//        $address->state = $request->state;
-//        $address->country = $request->country;
-//        $address->zipCode = $request->zipCode;
 
         $data = $request->validate([
             'userId' => ['required', 'integer'],
@@ -95,6 +81,7 @@ class OrderController extends Controller
 
     public function destroy($id)
     {
+        error_log('destroy' . $id);
         $order = Order::find($id);
         if (!$order) {
             return response()->json(['error' => 'No se ha encontrado el pedido'], 400);
@@ -103,7 +90,6 @@ class OrderController extends Controller
         $order->delete();
 
         return redirect()->route('orders.index');
-
     }
 
 
