@@ -24,6 +24,16 @@ class CheckoutController extends Controller
     public function complete(Request $request)
     {
 
+        $data = $request->validate([
+            'street' => ['required', 'max:255', 'min:3'],
+            'number' => ['required', 'max:255', 'numeric'],
+            'city' => ['required', 'max:255', 'min:3'],
+            'state' => ['required', 'max:255', 'min:3'],
+            'country' => ['required', 'max:255', 'min:3'],
+            'zipCode' => ['required', 'numeric', 'digits:5'],
+            'card_number' => ['required','numeric', 'digits:16'],
+        ], $this->messages());
+
         $cart = session('cart', []);
 
         $total = array_reduce($cart, function ($carry, $item) {
@@ -65,6 +75,17 @@ class CheckoutController extends Controller
         flash('Compra realizada correctamente '.$total)->success();
 
         return redirect()->route('profile.index');
+    }
+
+    public function messages()
+    {
+        return [
+            'required' => 'El campo :attribute es requerido',
+            'max' => 'El campo :attribute no puede tener más de :max caracteres',
+            'min' => 'El campo :attribute no puede tener menos de :min caracteres',
+            'numeric' => 'El campo :attribute debe ser un número',
+            'digits' => 'El campo :attribute debe tener :digits dígitos',
+        ];
     }
 
 }

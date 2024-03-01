@@ -29,7 +29,7 @@ class OrderControllerTest extends TestCase
         $this->actingAs($this->employee, 'employee');
 
         $this->order = [
-            '_id' => '60b3e3e3e4b0e3e3e4b0e3e3',
+            '_id' => '65e1964088727be47b0042a2',
             'userId' => 1,
             'client' => json_encode(['name' => 'Test Client', 'phone' => '123456789']),
             'lineOrders' => json_encode([['funkoId' => 1, 'quantity' => 1, 'price' => 10]]),
@@ -54,7 +54,7 @@ class OrderControllerTest extends TestCase
         $collectionName = 'orders';
 
         $orderData = [
-            '_id' => '60b3e3e3e4b0e3e3e4b0e3e3',
+            '_id' => '65e1964088727be47b0042a2',
             'userId' => 1,
             'client' => ['name' => 'Test Client', 'phone' => '123456789'],
             'lineOrders' => [['funkoId' => 1, 'quantity' => 1, 'price' => 10]],
@@ -75,7 +75,7 @@ class OrderControllerTest extends TestCase
 
     public function test_show_should_return_order()
     {
-        $response = $this->get(route('orders.show', $this->order['_id']));
+        $response = $this->get(route('orders.show', '65e1964088727be47b0042a2'));
         $response->assertStatus(200);
         $response->assertViewIs('orders.show');
         $response->assertViewHas('orders');
@@ -83,7 +83,7 @@ class OrderControllerTest extends TestCase
 
     public function test_destroy_should_delete_order()
     {
-        $response = $this->delete(route('orders.destroy', $this->order['_id']));
+        $response = $this->delete(route('orders.destroy', '65e1964088727be47b0042a2'));
         $response->assertStatus(302);
         $response->assertRedirect(route('orders.index'));
         $this->assertDatabaseMissing('orders', [
