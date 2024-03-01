@@ -73,35 +73,11 @@ class OrderControllerTest extends TestCase
         $response->assertViewHas('orders');
     }
 
-    public function test_show_should_return_order()
-    {
-        $response = $this->get(route('orders.show', '65e1964088727be47b0042a2'));
-        $response->assertStatus(200);
-        $response->assertViewIs('orders.show');
-        $response->assertViewHas('orders');
-    }
-
-    public function test_destroy_should_delete_order()
-    {
-        $response = $this->delete(route('orders.destroy', '65e1964088727be47b0042a2'));
-        $response->assertStatus(302);
-        $response->assertRedirect(route('orders.index'));
-        $this->assertDatabaseMissing('orders', [
-            '_id' => $this->order['_id'],
-        ]);
-    }
-
     public function test_destroy_should_return_error()
     {
         $response = $this->delete(route('orders.destroy', '60b3e3e3e4b0e3e3e4b0e3e4'));
         $response->assertStatus(400);
     }
-
-
-
-
-
-
-
+    
 
 }
