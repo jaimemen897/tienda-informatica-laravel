@@ -31,8 +31,7 @@
                                             <form action="{{route('cart.decrease')}}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{$item->product->id}}">
-                                                <button type="submit" class="btn btn-secondary rounded-circle"
-                                                        onclick="return confirm('¿Estás seguro de que desea quitar un {{$item->product->name}}?')">
+                                                <button type="submit" class="btn btn-secondary rounded-circle">
                                                     <i class="bi bi-dash"></i>
                                                 </button>
                                             </form>
@@ -51,8 +50,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <input type="hidden" name="product_id" value="{{$item->product->id}}">
-                                                <button type="submit" class="btn btn-danger"
-                                                        onclick="return confirm('¿Estás seguro de que desea eliminar el producto {{$item->product->name}}?')">
+                                                <button type="submit" class="btn btn-danger">
                                                     <i class="bi bi-trash"></i>
                                                     <span>Eliminar</span>
                                                 </button>

@@ -142,8 +142,6 @@ class CartController extends Controller
 
         session(['cart' => $cart]);
 
-        flash('Cantidad aumentada')->success();
-
         return redirect()->back();
     }
 
@@ -184,8 +182,6 @@ class CartController extends Controller
         }
 
         session(['cart' => $cart]);
-
-        flash('Cantidad disminuida')->success();
 
         return redirect()->back();
     }
