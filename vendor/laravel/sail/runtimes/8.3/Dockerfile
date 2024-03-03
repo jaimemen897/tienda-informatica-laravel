@@ -49,7 +49,7 @@ RUN apt-get update \
     && apt-get install -y postgresql-client-$POSTGRES_VERSION \
     && apt-get -y autoremove \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 
 RUN echo "extension=mongodb.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
 

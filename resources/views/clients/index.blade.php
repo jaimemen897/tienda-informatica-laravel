@@ -32,9 +32,10 @@
                 @foreach ($clients as $client)
                     <div class="col-md-3 mb-4">
                         <div class="card">
-                            <div class="divImagePerson">
+                            <div class="w-100 flex-fill">
                                 <a href="{{ route('client.show', $client->id) }}">
-                                    <img alt="Imagen del cliente" src="{{ $client->getImageUrl() }}">
+                                    <img class="card-img-top p-3" alt="Imagen del cliente"
+                                         src="{{ $client->getImageUrl() }}">
                                 </a>
                             </div>
                             <div class="card-body">

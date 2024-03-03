@@ -1,4 +1,4 @@
-@php use App\Models\Employee; @endphp
+@php @endphp
 @extends('main')
 
 @section('title', 'Empleados')
@@ -32,11 +32,12 @@
                 @foreach ($employees as $employee)
                     <div class="col-md-3 mb-4">
                         <div class="card">
-                                <div class="divImagePerson">
-                                    <a href="{{ route('employee.show', $employee->id) }}">
-                                        <img alt="Imagen del empleado" src="{{ $employee->getImageUrl() }}">
-                                    </a>
-                                </div>
+                            <div class="w-100 flex-fill">
+                                <a href="{{ route('employee.show', $employee->id) }}">
+                                    <img class="card-img-top p-3" alt="Imagen del empleado"
+                                         src="{{ $employee->getImageUrl() }}">
+                                </a>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title text-truncate">{{ $employee->name }} {{ $employee->surname }}</h5>
                                 <p class="card-text text-truncate">{{ $employee->email }}</p>

@@ -31,9 +31,9 @@
                 @foreach ($products as $product)
                     <div class="col-md-4 mb-4">
                         <div class="card">
-                            <div class="divImage position-relative">
+                            <div class="w-100 flex-fill">
                                 <a href="{{ route('product.show', $product->id) }}">
-                                    <img class="card-img-top" alt="Imagen del producto"
+                                    <img class="card-img-top p-3" alt="Imagen del producto"
                                          src="{{ $product->getImageUrl() }}">
                                 </a>
                                 @if($product->stock === '0')
