@@ -175,7 +175,6 @@ return array(
     'Database\\Factories\\CategoryFactory' => $baseDir . '/database/factories/CategoryFactory.php',
     'Database\\Factories\\ClientFactory' => $baseDir . '/database/factories/ClientFactory.php',
     'Database\\Factories\\EmployeeFactory' => $baseDir . '/database/factories/EmployeeFactory.php',
-    'Database\\Factories\\OrderFactory' => $baseDir . '/database/factories/OrderFactory.php',
     'Database\\Factories\\ProductFactory' => $baseDir . '/database/factories/ProductFactory.php',
     'Database\\Factories\\SupplierFactory' => $baseDir . '/database/factories/SupplierFactory.php',
     'Database\\Factories\\UserFactory' => $baseDir . '/database/factories/UserFactory.php',

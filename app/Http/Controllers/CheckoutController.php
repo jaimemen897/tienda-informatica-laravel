@@ -23,10 +23,9 @@ class CheckoutController extends Controller
 
     public function complete(Request $request)
     {
-
         $data = $request->validate([
             'street' => ['required', 'max:255', 'min:3'],
-            'number' => ['required', 'max:255', 'numeric'],
+            'number' => ['required', 'max_digits:255', 'numeric'],
             'city' => ['required', 'max:255', 'min:3'],
             'state' => ['required', 'max:255', 'min:3'],
             'country' => ['required', 'max:255', 'min:3'],
@@ -72,7 +71,7 @@ class CheckoutController extends Controller
 
         session(['cart' => []]);
 
-        flash('Compra realizada correctamente '.$total)->success();
+        flash('Compra realizada correctamente - Total: '.$total . '€')->success();
 
         return redirect()->route('profile.index');
     }
@@ -80,11 +79,29 @@ class CheckoutController extends Controller
     public function messages()
     {
         return [
-            'required' => 'El campo :attribute es requerido',
-            'max' => 'El campo :attribute no puede tener más de :max caracteres',
-            'min' => 'El campo :attribute no puede tener menos de :min caracteres',
-            'numeric' => 'El campo :attribute debe ser un número',
-            'digits' => 'El campo :attribute debe tener :digits dígitos',
+            'street.required' => 'La calle es requerida',
+            'street.max' => 'La calle debe tener menos de 255 caracteres',
+            'street.min' => 'La calle debe tener más de 3 caracteres',
+            'number.required' => 'El número es requerido',
+            'number.max' => 'El número debe tener menos de 255 caracteres',
+            'number.min' => 'El número debe tener más de 3 caracteres',
+            'number.max_digits' => 'El número debe tener menos de 255 caracteres',
+            'number.numeric' => 'El número debe ser un número',
+            'city.required' => 'La ciudad es requerida',
+            'city.max' => 'La ciudad debe tener menos de 255 caracteres',
+            'city.min' => 'La ciudad debe tener más de 3 caracteres',
+            'state.required' => 'La provincia es requerida',
+            'state.max' => 'La provincia debe tener menos de 255 caracteres',
+            'state.min' => 'La provincia debe tener más de 3 caracteres',
+            'country.required' => 'El país es requerido',
+            'country.max' => 'El país debe tener menos de 255 caracteres',
+            'country.min' => 'El país debe tener más de 3 caracteres',
+            'zipCode.required' => 'El código postal es requerido',
+            'zipCode.numeric' => 'El código postal debe ser un número',
+            'zipCode.digits' => 'El código postal debe tener 5 dígitos',
+            'card_number.required' => 'El número de tarjeta es requerido',
+            'card_number.numeric' => 'El número de tarjeta debe ser un número',
+            'card_number.digits' => 'El número de tarjeta debe tener 16 dígitos',
         ];
     }
 

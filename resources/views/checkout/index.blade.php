@@ -21,33 +21,33 @@
                             <h2>Dirección de envío</h2>
                             <div class="form-group">
                                 <label for="street">Calle</label>
-                                <input type="text" id="street" name="street" class="form-control">
+                                <input type="text" id="street" name="street" class="form-control" value="{{ old('street') }}">
                             </div>
                             <div class="form-group">
                                 <label for="number">Numero</label>
-                                <input type="number" id="number" name="number" class="form-control">
+                                <input type="number" id="number" name="number" class="form-control" value="{{ old('number') }}">
                             </div>
                             <div class="form-group">
                                 <label for="city">Ciudad</label>
-                                <input type="text" id="city" name="city" class="form-control">
+                                <input type="text" id="city" name="city" class="form-control" value="{{ old('city') }}">
                             </div>
                             <div class="form-group">
                                 <label for="zipCode">Codigo Postal</label>
-                                <input type="number" id="zipCode" name="zipCode" class="form-control">
+                                <input type="number" id="zipCode" name="zipCode" class="form-control" value="{{ old('zipCode') }}">
                             </div>
                             <div class="form-group">
                                 <label for="state">Provincia</label>
-                                <input type="text" id="state" name="state" class="form-control">
+                                <input type="text" id="state" name="state" class="form-control" value="{{ old('state') }}">
                             </div>
                             <div class="form-group">
                                 <label for="country">Pais</label>
-                                <input type="text" id="country" name="country" class="form-control">
+                                <input type="text" id="country" name="country" class="form-control" value="{{ old('country') }}">
                             </div>
 
                             <h2 class="mt-2">Detalles de la tarjeta de crédito</h2>
                             <div class="form-group">
                                 <label for="card_number">Número de tarjeta</label>
-                                <input type="text" id="card_number" name="card_number" class="form-control">
+                                <input type="number" id="card_number" name="card_number" class="form-control" value="{{ old('card_number') }}">
                             </div>
 
                             <button type="submit" class="btn btn-primary mt-3">Realizar pago</button>
