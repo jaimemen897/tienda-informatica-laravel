@@ -3,9 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Employee;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class EmployeeTableSeeder extends Seeder
 {
@@ -14,6 +12,17 @@ class EmployeeTableSeeder extends Seeder
      */
     public function run(): void
     {
-       Employee::factory()->count(10)->create();
+        Employee::factory()->count(10)->create();
+
+        Employee::create([
+            'name' => 'Juan',
+            'surname' => 'Pérez',
+            'phone' => '123456789',
+            'salary' => 1000,
+            'position' => 'Manager',
+            'email' => 'empleado@empleado.es',
+            'image' => Employee::IMAGE_DEFAULT,
+            'password' => bcrypt('empleado'),
+        ]);
     }
 }

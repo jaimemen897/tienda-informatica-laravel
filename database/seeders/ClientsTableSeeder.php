@@ -14,5 +14,14 @@ class ClientsTableSeeder extends Seeder
     public function run(): void
     {
         Client::factory()->count(20)->create();
+
+        Client::create([
+            'name' => 'Juan',
+            'surname' => 'Pérez',
+            'phone' => '123456789',
+            'email' => 'cliente@cliente.es',
+            'image' => Client::IMAGE_DEFAULT,
+            'password' => bcrypt('cliente'),
+        ]);
     }
 }
