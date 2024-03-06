@@ -9,17 +9,10 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        Category::factory()->count(10)->create();
-        Category::create([
-            'name' => 'PC'
-        ]);
+        $categories = ['PC', 'GAMER', 'OFICINA', 'PORTÁTIL', 'ESCRITORIO', 'COMPONENTES', 'PERIFÉRICOS', 'ACCESORIOS', 'SOFTWARE', 'REDES', 'ALMACENAMIENTO', 'MULTIMEDIA', 'SEGURIDAD', 'ENTRETENIMIENTO', 'IMPRESIÓN', 'DISEÑO GRÁFICO', 'DESARROLLO', 'EDUCACIÓN'];
 
-        Category::create([
-            'name' => 'GAMER'
-        ]);
-
-        Category::create([
-            'name' => 'OFICINA'
-        ]);
+        foreach ($categories as $category) {
+            Category::create(['name' => $category]);
+        }
     }
 }

@@ -45,7 +45,7 @@
                                 @endif
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">{{ $product->name }}</h5>
+                                <h5 class="card-title text-truncate">{{ $product->name }}</h5>
                                 <small class="card-text">{{$product->category->name}}</small>
                                 <p class="card-text">{{ $product->price }}€ - {{ $product->stock }} unidades</p>
                                 <p class="card-text text-truncate">{{$product->description}}</p>
