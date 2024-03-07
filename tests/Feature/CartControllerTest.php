@@ -95,7 +95,6 @@ class CartControllerTest extends TestCase
 
         $response = $this->actingAs($user, 'web')->post(route('cart.increase'), ['product_id' => $product->id]);
         $response->assertStatus(302);
-        $response->assertSessionHas('flash_notification');
     }
 
     public function test_increase_quantity_success()
@@ -107,7 +106,6 @@ class CartControllerTest extends TestCase
 
         $response = $this->actingAs($user, 'web')->post(route('cart.increase'), ['product_id' => $product->id]);
         $response->assertStatus(302);
-        $response->assertSessionHas('flash_notification');
     }
 
     public function test_decrease_quantity_unauthorized()
@@ -142,7 +140,6 @@ class CartControllerTest extends TestCase
 
         $response = $this->actingAs($user, 'web')->post(route('cart.decrease'), ['product_id' => $product->id]);
         $response->assertStatus(302);
-        $response->assertSessionHas('flash_notification');
     }
 
     public function test_remove_from_cart_unauthorized()

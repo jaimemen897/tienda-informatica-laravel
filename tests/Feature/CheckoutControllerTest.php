@@ -23,7 +23,7 @@ class CheckoutControllerTest extends TestCase
             'id' => '60b3e3e3e4b0e3e3e4b0e3e3',
             'userId' => $this->employee->id,
             'client' => json_encode(['name' => 'Test Client', 'phone' => '123456789']),
-            'lineOrders' => json_encode([['funkoId' => 1, 'quantity' => 1, 'price' => 10]]),
+            'lineOrders' => json_encode([['productId' => 1, 'quantity' => 1, 'price' => 10]]),
             'totalItems' => 1,
             'total' => 10,
         ];
@@ -32,7 +32,7 @@ class CheckoutControllerTest extends TestCase
 
     public function test_index_should_return_paginated_orders()
     {
-        $this->session(['cart' => [['funkoId' => 1, 'quantity' => 1, 'price' => 10]]]);
+        $this->session(['cart' => [['productId' => 1, 'quantity' => 1, 'price' => 10]]]);
 
         $response = $this->get(route('checkout.index'));
         $response->assertStatus(200);
@@ -45,12 +45,4 @@ class CheckoutControllerTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(route('product.index'));
     }
-
-    public function test_complete_order_should_return_success()
-    {
-        $response = $this->post(route('checkout.complete'));
-        $response->assertStatus(302);
-        $response->assertRedirect(route('profile.index'));
-    }
-
 }

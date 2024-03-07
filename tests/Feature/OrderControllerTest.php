@@ -32,7 +32,7 @@ class OrderControllerTest extends TestCase
             '_id' => '65e1964088727be47b0042a2',
             'userId' => 1,
             'client' => json_encode(['name' => 'Test Client', 'phone' => '123456789']),
-            'lineOrders' => json_encode([['funkoId' => 1, 'quantity' => 1, 'price' => 10]]),
+            'lineOrders' => json_encode([['productId' => 1, 'quantity' => 1, 'price' => 10]]),
             'totalItems' => 1,
             'total' => 10,
         ];
@@ -57,7 +57,7 @@ class OrderControllerTest extends TestCase
             '_id' => '65e1964088727be47b0042a2',
             'userId' => 1,
             'client' => ['name' => 'Test Client', 'phone' => '123456789'],
-            'lineOrders' => [['funkoId' => 1, 'quantity' => 1, 'price' => 10]],
+            'lineOrders' => [['productId' => 1, 'quantity' => 1, 'price' => 10]],
             'totalItems' => 1,
             'total' => 10,
         ];
